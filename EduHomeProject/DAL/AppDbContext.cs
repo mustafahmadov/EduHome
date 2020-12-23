@@ -14,5 +14,6 @@ namespace EduHomeProject.DAL
         public DbSet<Bio> Bios { get; set; }
         public DbSet<LeftNotice> LeftNotices { get; set; }
         public DbSet<RightNotice> RightNotices { get; set; }
+        public DbSet<Choose> Chooses { get; set; }
     }
 }

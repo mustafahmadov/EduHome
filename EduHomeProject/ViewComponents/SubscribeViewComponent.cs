@@ -7,16 +7,15 @@ using System.Threading.Tasks;
 
 namespace EduHomeProject.ViewComponents
 {
-    public class HeaderViewComponent:ViewComponent
+    public class SubscribeViewComponent : ViewComponent
     {
         private readonly AppDbContext _context;
-        public HeaderViewComponent(AppDbContext context)
+        public SubscribeViewComponent(AppDbContext context)
         {
             _context = context;
         }
-        public async Task<IViewComponentResult> InvokeAsync(string bannerTitle)
+        public async Task<IViewComponentResult> InvokeAsync()
         {
-            ViewBag.Title = bannerTitle;
             return View(await Task.FromResult(_context.Bios.FirstOrDefault()));
         }
     }

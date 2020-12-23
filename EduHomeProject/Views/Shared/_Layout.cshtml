@@ -28,9 +28,11 @@
 </head>
 <body>
     
-    @await Component.InvokeAsync("Header")
+    @await Component.InvokeAsync("Header",new { bannerTitle = ViewBag.Title})
 
     @RenderBody()
+
+    @await Component.InvokeAsync("Subscribe")
 
     @await Component.InvokeAsync("Footer") 
 

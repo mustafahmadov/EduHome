@@ -25,11 +25,13 @@ namespace EduHomeProject.Controllers
 
         public IActionResult Index()
         {
+            TempData["controllerName"] = this.ControllerContext.RouteData.Values["controller"].ToString();
             HomeVM homeVM = new HomeVM()
             {
                 Sliders = _context.Sliders.Where(s => s.HasDeleted == false).ToList(),
                 LeftNotices = _context.LeftNotices.ToList(),
                 RightNotices = _context.RightNotices.ToList(),
+                Choose = _context.Chooses.FirstOrDefault()
             };
             return View(homeVM);
         }
