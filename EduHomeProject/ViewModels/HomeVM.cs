@@ -9,5 +9,7 @@ namespace EduHomeProject.ViewModels
     public class HomeVM
     {
         public List<Slider> Sliders { get; set; }
+        public List<LeftNotice> LeftNotices { get; set; }
+        public List<RightNotice> RightNotices { get; set; }
     }
 }

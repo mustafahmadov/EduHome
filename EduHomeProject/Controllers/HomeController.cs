@@ -28,6 +28,8 @@ namespace EduHomeProject.Controllers
             HomeVM homeVM = new HomeVM()
             {
                 Sliders = _context.Sliders.Where(s => s.HasDeleted == false).ToList(),
+                LeftNotices = _context.LeftNotices.ToList(),
+                RightNotices = _context.RightNotices.ToList(),
             };
             return View(homeVM);
         }

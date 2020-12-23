@@ -12,5 +12,7 @@ namespace EduHomeProject.DAL
         public AppDbContext(DbContextOptions<AppDbContext> options):base(options){}
         public DbSet<Slider> Sliders { get; set; }
         public DbSet<Bio> Bios { get; set; }
+        public DbSet<LeftNotice> LeftNotices { get; set; }
+        public DbSet<RightNotice> RightNotices { get; set; }
     }
 }
