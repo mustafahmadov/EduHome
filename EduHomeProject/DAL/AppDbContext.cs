@@ -15,5 +15,17 @@ namespace EduHomeProject.DAL
         public DbSet<LeftNotice> LeftNotices { get; set; }
         public DbSet<RightNotice> RightNotices { get; set; }
         public DbSet<Choose> Chooses { get; set; }
+        public DbSet<Course> Courses { get; set; }
+        public DbSet<CourseDetail> CourseDetails { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Course>()
+            .HasOne(a => a.CourseDetail)
+            .WithOne(a => a.Course)
+            .HasForeignKey<CourseDetail>(c => c.CourseId);
+        }
+
+
     }
 }

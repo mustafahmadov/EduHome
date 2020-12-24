@@ -4,14 +4,16 @@ using EduHomeProject.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EduHomeProject.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201224121107_courseAndCoursedetailRelationAdded")]
+    partial class courseAndCoursedetailRelationAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -103,10 +105,6 @@ namespace EduHomeProject.Migrations
                     b.Property<bool>("HasDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<string>("Image")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -123,19 +121,7 @@ namespace EduHomeProject.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("About")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("AboutApply")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("AboutCertification")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("ClassDuration")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Content")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("CourseId")

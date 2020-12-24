@@ -13,5 +13,7 @@ namespace EduHomeProject.ViewModels
         public List<RightNotice> RightNotices { get; set; }
 
         public Choose Choose { get; set; }
+        public List<Course> Courses { get; set; }
+        public List<CourseDetail> CourseDetails { get; set; }
     }
 }

@@ -31,7 +31,8 @@ namespace EduHomeProject.Controllers
                 Sliders = _context.Sliders.Where(s => s.HasDeleted == false).ToList(),
                 LeftNotices = _context.LeftNotices.ToList(),
                 RightNotices = _context.RightNotices.ToList(),
-                Choose = _context.Chooses.FirstOrDefault()
+                Choose = _context.Chooses.FirstOrDefault(),
+                Courses = _context.Courses.Where(c=>c.HasDeleted==false).ToList()
             };
             return View(homeVM);
         }

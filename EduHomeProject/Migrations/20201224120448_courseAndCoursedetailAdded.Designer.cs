@@ -4,14 +4,16 @@ using EduHomeProject.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EduHomeProject.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201224120448_courseAndCoursedetailAdded")]
+    partial class courseAndCoursedetailAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -91,9 +93,6 @@ namespace EduHomeProject.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("CourseDetailId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime?>("DeletedTime")
                         .HasColumnType("datetime2");
 
@@ -102,10 +101,6 @@ namespace EduHomeProject.Migrations
 
                     b.Property<bool>("HasDeleted")
                         .HasColumnType("bit");
-
-                    b.Property<string>("Image")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -123,23 +118,8 @@ namespace EduHomeProject.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("About")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("AboutApply")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("AboutCertification")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("ClassDuration")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Content")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("CourseId")
-                        .HasColumnType("int");
 
                     b.Property<DateTime?>("DeletedTime")
                         .HasColumnType("datetime2");
@@ -168,9 +148,6 @@ namespace EduHomeProject.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CourseId")
-                        .IsUnique();
 
                     b.ToTable("CourseDetails");
                 });
@@ -236,15 +213,6 @@ namespace EduHomeProject.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Sliders");
-                });
-
-            modelBuilder.Entity("EduHomeProject.Models.CourseDetail", b =>
-                {
-                    b.HasOne("EduHomeProject.Models.Course", "Course")
-                        .WithOne("CourseDetail")
-                        .HasForeignKey("EduHomeProject.Models.CourseDetail", "CourseId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }
