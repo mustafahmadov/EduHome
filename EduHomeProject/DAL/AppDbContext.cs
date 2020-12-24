@@ -19,7 +19,9 @@ namespace EduHomeProject.DAL
         public DbSet<CourseDetail> CourseDetails { get; set; }
         public DbSet<Event> Events { get; set; }
         public DbSet<EventDetail> EventDetails { get; set; }
-
+        public DbSet<Student> Students { get; set; }
+        public DbSet<StudentComment> StudentComments { get; set; }
+        public DbSet<StudentCourse> StudentCourses { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Course>()

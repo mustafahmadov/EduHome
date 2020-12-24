@@ -17,7 +17,7 @@ namespace EduHomeProject.Models
         public string Image { get; set; }
         public string Phone { get; set; }
         public bool HasDeleted { get; set; }
-        public DateTime DeletedTime { get; set; }
-        public virtual ICollection<StudentComments> studentComments { get; set; }
+        public DateTime? DeletedTime { get; set; }
+        public virtual ICollection<StudentComment> studentComments { get; set; }
     }
 }

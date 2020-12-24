@@ -261,3 +261,4 @@ C:\Users\musta\Desktop\EduHome\EduHomeProject\obj\Debug\netcoreapp3.1\Razor\View
 C:\Users\musta\Desktop\EduHome\EduHomeProject\obj\Debug\netcoreapp3.1\Razor\Views\Contact\Index.cshtml.g.cs
 C:\Users\musta\Desktop\EduHome\EduHomeProject\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Components\Subscribe\Default.cshtml.g.cs
 C:\Users\musta\Desktop\EduHome\EduHomeProject\obj\Debug\netcoreapp3.1\Razor\Views\Course\CourseDetail.cshtml.g.cs
+C:\Users\musta\Desktop\EduHome\EduHomeProject\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Components\Testimonial\Default.cshtml.g.cs

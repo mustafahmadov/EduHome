@@ -4,14 +4,16 @@ using EduHomeProject.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EduHomeProject.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201224190455_StudentAndStudentTablesAdded1")]
+    partial class StudentAndStudentTablesAdded1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -438,7 +440,7 @@ namespace EduHomeProject.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime?>("DeletedTime")
+                    b.Property<DateTime>("DeletedTime")
                         .HasColumnType("datetime2");
 
                     b.Property<bool>("HasDeleted")
@@ -471,7 +473,7 @@ namespace EduHomeProject.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime?>("DeletedTime")
+                    b.Property<DateTime>("DeletedTime")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
@@ -488,28 +490,6 @@ namespace EduHomeProject.Migrations
                     b.HasIndex("StudentId");
 
                     b.ToTable("StudentComments");
-                });
-
-            modelBuilder.Entity("EduHomeProject.Models.StudentCourse", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("CourseId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("StudentId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CourseId");
-
-                    b.HasIndex("StudentId");
-
-                    b.ToTable("StudentCourses");
                 });
 
             modelBuilder.Entity("EduHomeProject.Models.CourseDetail", b =>
@@ -534,21 +514,6 @@ namespace EduHomeProject.Migrations
                 {
                     b.HasOne("EduHomeProject.Models.Student", "Student")
                         .WithMany("studentComments")
-                        .HasForeignKey("StudentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("EduHomeProject.Models.StudentCourse", b =>
-                {
-                    b.HasOne("EduHomeProject.Models.Course", "Course")
-                        .WithMany()
-                        .HasForeignKey("CourseId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("EduHomeProject.Models.Student", "Student")
-                        .WithMany()
                         .HasForeignKey("StudentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

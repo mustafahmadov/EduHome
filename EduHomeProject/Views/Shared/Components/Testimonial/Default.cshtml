@@ -1,0 +1,30 @@
+﻿@model List<StudentComment>
+
+<div class="testimonial-area pt-110 pb-105 text-center">
+    <div class="container">
+        <div class="row">
+            <div class="testimonial-owl owl-theme owl-carousel">
+                @foreach (StudentComment comment in Model)
+                {
+                    <div class="col-md-8 col-md-offset-2 col-sm-12">
+
+                        <div class="single-testimonial">
+                            <div class="testimonial-info">
+                                <div class="testimonial-img">
+                                    <img src="~/assets/img/testimonial/@comment.Student.Image" alt="testimonial">
+                                </div>
+                                <div class="testimonial-content">
+                                    <p>@comment.Description</p>
+                                    <h4>@comment.Student.Name @comment.Student.Surname</h4>
+                                    <h5>Student, CSE</h5>
+                                </div>
+                            </div>
+                        </div>
+                        
+
+                    </div>
+                }
+                </div>
+        </div>
+    </div>
+</div>
