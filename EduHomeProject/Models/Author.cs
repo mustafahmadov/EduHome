@@ -11,5 +11,7 @@ namespace EduHomeProject.Models
         public int Id { get; set; }
         [Required]
         public string FullName { get; set; }
+        public bool HasDeleted { get; set; }
+        public DateTime? DeletedTime { get; set; }
     }
 }

@@ -4,14 +4,16 @@ using EduHomeProject.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EduHomeProject.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201224202314_BlogAndBlogDetailsTablesAdded2")]
+    partial class BlogAndBlogDetailsTablesAdded2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -26,15 +28,9 @@ namespace EduHomeProject.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime?>("DeletedTime")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("FullName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("HasDeleted")
-                        .HasColumnType("bit");
 
                     b.HasKey("Id");
 
@@ -89,9 +85,6 @@ namespace EduHomeProject.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("BlogDetailId")
-                        .HasColumnType("int");
-
                     b.Property<int>("CommentsCount")
                         .HasColumnType("int");
 
@@ -123,9 +116,6 @@ namespace EduHomeProject.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("BlogId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime?>("DeletedTime")
                         .HasColumnType("datetime2");
 
@@ -149,9 +139,6 @@ namespace EduHomeProject.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("BlogId")
-                        .IsUnique();
 
                     b.ToTable("BlogDetails");
                 });
@@ -606,15 +593,6 @@ namespace EduHomeProject.Migrations
                     b.HasIndex("StudentId");
 
                     b.ToTable("StudentCourses");
-                });
-
-            modelBuilder.Entity("EduHomeProject.Models.BlogDetail", b =>
-                {
-                    b.HasOne("EduHomeProject.Models.Blog", "Blog")
-                        .WithOne("BlogDetail")
-                        .HasForeignKey("EduHomeProject.Models.BlogDetail", "BlogId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("EduHomeProject.Models.CourseDetail", b =>

@@ -16,7 +16,8 @@ namespace EduHomeProject.Models
         public string ThirdContent { get; set; }
         public string FourthContent { get; set; }
         public bool HasDeletedTime { get; set; }
-
         public DateTime? DeletedTime { get; set; } 
+        public int BlogId { get; set; }
+        public Blog Blog { get; set; }
     }
 }

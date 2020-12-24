@@ -13,10 +13,11 @@ namespace EduHomeProject.Models
         public string Image { get; set; }
         public string Description { get; set; }
         public DateTime? PostedTime { get; set; }
-
         public int CommentsCount { get; set; }
         public bool HasDeleted { get; set; }
         public DateTime? DeletedTime { get; set; }
+        public int BlogDetailId { get; set; }
+        public BlogDetail BlogDetail { get; set; }
 
     }
 }

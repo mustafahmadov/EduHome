@@ -22,6 +22,9 @@ namespace EduHomeProject.DAL
         public DbSet<Student> Students { get; set; }
         public DbSet<StudentComment> StudentComments { get; set; }
         public DbSet<StudentCourse> StudentCourses { get; set; }
+        public DbSet<Blog> Blogs { get; set; }
+        public DbSet<BlogDetail> BlogDetails { get; set; }
+        public DbSet<Author> Authors { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Course>()
@@ -33,6 +36,11 @@ namespace EduHomeProject.DAL
                 .HasOne(e => e.EventDetail)
                 .WithOne(e => e.Event)
                 .HasForeignKey<EventDetail>(ed => ed.EventId);
+
+            modelBuilder.Entity<Blog>()
+                .HasOne(b => b.BlogDetail)
+                .WithOne(b => b.Blog)
+                .HasForeignKey<BlogDetail>(BlogDetail => BlogDetail.BlogId);
 
             modelBuilder.Entity<Event>().HasData(
                 new Event
