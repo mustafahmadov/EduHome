@@ -8,6 +8,7 @@ using Microsoft.Extensions.Logging;
 using EduHomeProject.Models;
 using EduHomeProject.DAL;
 using EduHomeProject.ViewModels;
+using Microsoft.EntityFrameworkCore;
 
 namespace EduHomeProject.Controllers
 {
@@ -32,14 +33,11 @@ namespace EduHomeProject.Controllers
                 LeftNotices = _context.LeftNotices.ToList(),
                 RightNotices = _context.RightNotices.ToList(),
                 Choose = _context.Chooses.FirstOrDefault(),
-                Courses = _context.Courses.Where(c=>c.HasDeleted==false).ToList()
+                Courses = _context.Courses.Where(c => c.HasDeleted == false).ToList(),
+                Events = _context.Events.Include(e=>e.EventDetail)
+                      .Where(e=>e.HasDeleted==false&& e.ExperiedDate==false).Take(8).ToList(),
             };
             return View(homeVM);
-        }
-        public IActionResult CourseDetails(int? id)
-        {
-            CourseDetail model = _context.CourseDetails.Where(cd => cd.HasDeleted == false && cd.CourseId == id).FirstOrDefault();
-            return PartialView("_CoursePartial",model);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

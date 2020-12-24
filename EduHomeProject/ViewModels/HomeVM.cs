@@ -15,5 +15,7 @@ namespace EduHomeProject.ViewModels
         public Choose Choose { get; set; }
         public List<Course> Courses { get; set; }
         public List<CourseDetail> CourseDetails { get; set; }
+        public List<Event> Events { get; set; }
+        public List<EventDetail> EventDetails { get; set; }
     }
 }

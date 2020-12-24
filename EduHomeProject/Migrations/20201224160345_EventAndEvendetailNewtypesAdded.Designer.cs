@@ -4,14 +4,16 @@ using EduHomeProject.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EduHomeProject.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201224160345_EventAndEvendetailNewtypesAdded")]
+    partial class EventAndEvendetailNewtypesAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -182,11 +184,12 @@ namespace EduHomeProject.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("DeletedTime")
+                    b.Property<DateTime?>("DeletedTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("EndTime")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("EndTime")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("EventDetailId")
                         .HasColumnType("int");
@@ -205,120 +208,21 @@ namespace EduHomeProject.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("OrganizedDay")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("OrganizedDay")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PlacedArea")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("StartTime")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("StartTime")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.ToTable("Events");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            DeletedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            EventDetailId = 1,
-                            ExperiedDate = false,
-                            HasDeleted = false,
-                            Image = "event5.jpg",
-                            Name = "ADVANCE PHP WORKSHOP",
-                            PlacedArea = "Baku"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            DeletedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            EventDetailId = 2,
-                            ExperiedDate = false,
-                            HasDeleted = false,
-                            Image = "event6.jpg",
-                            Name = "ADVANCE PHP WORKSHOP",
-                            PlacedArea = "Baku"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            DeletedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            EventDetailId = 3,
-                            ExperiedDate = false,
-                            HasDeleted = false,
-                            Image = "event7.jpg",
-                            Name = "ADVANCE PHP WORKSHOP",
-                            PlacedArea = "Baku"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            DeletedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            EventDetailId = 4,
-                            ExperiedDate = false,
-                            HasDeleted = false,
-                            Image = "event8.jpg",
-                            Name = "ADVANCE PHP WORKSHOP",
-                            PlacedArea = "Baku"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            DeletedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            EventDetailId = 5,
-                            ExperiedDate = false,
-                            HasDeleted = false,
-                            Image = "event9.jpg",
-                            Name = "ADVANCE PHP WORKSHOP",
-                            PlacedArea = "Baku"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            DeletedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            EventDetailId = 1,
-                            ExperiedDate = false,
-                            HasDeleted = false,
-                            Image = "event10.jpg",
-                            Name = "ADVANCE PHP WORKSHOP",
-                            PlacedArea = "Baku"
-                        },
-                        new
-                        {
-                            Id = 7,
-                            DeletedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            EventDetailId = 7,
-                            ExperiedDate = false,
-                            HasDeleted = false,
-                            Image = "event11.jpg",
-                            Name = "ADVANCE PHP WORKSHOP",
-                            PlacedArea = "Baku"
-                        },
-                        new
-                        {
-                            Id = 8,
-                            DeletedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            EventDetailId = 8,
-                            ExperiedDate = false,
-                            HasDeleted = false,
-                            Image = "event12.jpg",
-                            Name = "ADVANCE PHP WORKSHOP",
-                            PlacedArea = "Baku"
-                        },
-                        new
-                        {
-                            Id = 9,
-                            DeletedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            EventDetailId = 9,
-                            ExperiedDate = false,
-                            HasDeleted = false,
-                            Image = "event13.jpg",
-                            Name = "ADVANCE PHP WORKSHOP",
-                            PlacedArea = "Baku"
-                        });
                 });
 
             modelBuilder.Entity("EduHomeProject.Models.EventDetail", b =>
@@ -328,7 +232,7 @@ namespace EduHomeProject.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime?>("DeletedTime")
+                    b.Property<DateTime>("DateTime")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("DetailedImage")
@@ -409,9 +313,6 @@ namespace EduHomeProject.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime?>("DeletedTime")
-                        .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");

@@ -13,16 +13,16 @@ namespace EduHomeProject.Models
         public string Image {get;set;}
         [Required]
         public string Name { get; set; }
-        [Required]
-        public DateTime OrganizedDay { get; set; }
-        [Required]
-        public DateTime StartTime { get; set; }
-        [Required]
-        public DateTime EndTime { get; set; }
+        public DateTime? OrganizedDay { get; set; }
+        public DateTime? StartTime { get; set; }
+        public DateTime? EndTime { get; set; }
         [Required]
         public string PlacedArea { get; set; }
         public bool HasDeleted { get; set; }
-        public DateTime? DeletedTime { get; set; }
+        public DateTime DeletedTime { get; set; }
+        public bool ExperiedDate { get; set; }
+        public int EventDetailId { get; set; }
+        public EventDetail EventDetail { get; set; }
 
 
     }

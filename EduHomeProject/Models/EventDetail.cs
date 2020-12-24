@@ -9,8 +9,6 @@ namespace EduHomeProject.Models
     public class EventDetail
     {
         public int Id { get; set; }
-        [Required]
-        public string Image { get; set; }
         [MaxLength(length:300)]
         public string FirstContent { get; set; }
         [MaxLength(length: 300)]
@@ -21,6 +19,10 @@ namespace EduHomeProject.Models
         public string DetailedImage { get; set; }
         [Required]
         public string DetailedPlacedArea { get; set; }
+        public bool HasDeleted { get; set; }
+        public DateTime? DeletedTime{ get; set; }
+        public int EventId { get; set; }
+        public Event Event { get; set; }
 
     }
 }

@@ -6,14 +6,18 @@ using System.Threading.Tasks;
 
 namespace EduHomeProject.Models
 {
-    public class Slider
+    public class Student
     {
         public int Id { get; set; }
         [Required]
+        public string Name { get; set; }
+        [Required]
+        public string Surname { get; set; }
+        [Required]
         public string Image { get; set; }
-        public string Title { get; set; }
-        public string Description { get; set; }
+        public string Phone { get; set; }
         public bool HasDeleted { get; set; }
-        public DateTime? DeletedTime { get; set; }
+        public DateTime DeletedTime { get; set; }
+        public virtual ICollection<StudentComments> studentComments { get; set; }
     }
 }
