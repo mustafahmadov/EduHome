@@ -36,6 +36,11 @@ namespace EduHomeProject.Controllers
             };
             return View(homeVM);
         }
+        public IActionResult CourseDetails(int? id)
+        {
+            CourseDetail model = _context.CourseDetails.Where(cd => cd.HasDeleted == false && cd.CourseId == id).FirstOrDefault();
+            return PartialView("_CoursePartial",model);
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
