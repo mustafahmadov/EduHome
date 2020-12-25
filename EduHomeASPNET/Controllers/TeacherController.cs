@@ -16,11 +16,18 @@ namespace EduHomeASPNET.Controllers
         {
             _context=context;
         }
-        public IActionResult Index()
+        public IActionResult Index(int? page)
         {
             TempData["controllerName"] = this.ControllerContext.RouteData.Values["controller"].ToString();
-            return View();
+            ViewBag.PageCount = Decimal.Ceiling((decimal)_context.Teachers.Where(t => t.HasDeleted == false).Count() / 8);
+            ViewBag.Page = page;
+            if (page == null)
+            {
+                return View(_context.Teachers.Where(t => t.HasDeleted == false).Take(8).ToList());
+            }
+            return View(_context.Teachers.Where(t => t.HasDeleted == false).Skip(((int)page - 1) * 8).Take(8).ToList());
         }
+
         public IActionResult TeacherDetail(int? id)
         {
             TempData["controllerName"] = this.ControllerContext.RouteData.Values["controller"].ToString();
