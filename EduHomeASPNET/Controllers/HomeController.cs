@@ -33,7 +33,7 @@ namespace EduHomeASPNET.Controllers
                 LeftNotices = _context.LeftNotices.ToList(),
                 RightNotices = _context.RightNotices.ToList(),
                 Choose = _context.Chooses.FirstOrDefault(),
-                Courses = _context.Courses.Where(c => c.HasDeleted == false).ToList(),
+                Courses = _context.Courses.Where(c => c.HasDeleted == false).Take(3).ToList(),
                 Events = _context.Events.Include(e=>e.EventDetail)
                       .Where(e=>e.HasDeleted==false&& e.ExperiedDate==false).Take(8).ToList(),
             };
