@@ -53,6 +53,11 @@ namespace EduHomeASPNET.DAL
                 .WithOne(t => t.Teacher)
                 .HasForeignKey<TeacherDetail>(TeacherDetail => TeacherDetail.TeacherId);
 
+            modelBuilder.Entity<Teacher>()
+                .HasOne(t => t.Skill)
+                .WithOne(t => t.Teacher)
+                .HasForeignKey<Skill>(s => s.TeacherId);
+
             modelBuilder.Entity<Event>().HasData(
                 new Event
                 {

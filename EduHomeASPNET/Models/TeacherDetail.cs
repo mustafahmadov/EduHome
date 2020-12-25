@@ -16,6 +16,8 @@ namespace EduHomeASPNET.Models
         public string Hobbies { get; set; }
         public string Experience { get; set; }
         public string Faculty { get; set; }
+        public bool HasDeleted { get; set; }
+        public DateTime DeletedTime { get; set; }
         public int TeacherId { get; set; }
         public Teacher Teacher { get; set; }
     }

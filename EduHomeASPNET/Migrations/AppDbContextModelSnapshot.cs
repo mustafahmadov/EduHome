@@ -542,17 +542,23 @@ namespace EduHomeASPNET.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Communication")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Communication")
+                        .HasColumnType("int");
 
-                    b.Property<string>("Design")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime>("DeletedTime")
+                        .HasColumnType("datetime2");
 
-                    b.Property<string>("Development")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Design")
+                        .HasColumnType("int");
 
-                    b.Property<string>("Innovation")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Development")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("HasDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("Innovation")
+                        .HasColumnType("int");
 
                     b.Property<int>("Language")
                         .HasColumnType("int");
@@ -565,7 +571,8 @@ namespace EduHomeASPNET.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("TeacherId");
+                    b.HasIndex("TeacherId")
+                        .IsUnique();
 
                     b.ToTable("Skills");
                 });
@@ -707,11 +714,17 @@ namespace EduHomeASPNET.Migrations
                     b.Property<int>("Age")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("DeletedTime")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Facebook")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("HasDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Image")
                         .IsRequired()
@@ -730,6 +743,9 @@ namespace EduHomeASPNET.Migrations
                     b.Property<string>("Profession")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("SkillId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Skype")
                         .HasColumnType("nvarchar(max)");
@@ -762,6 +778,9 @@ namespace EduHomeASPNET.Migrations
                     b.Property<string>("Degree")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("DeletedTime")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
@@ -774,6 +793,9 @@ namespace EduHomeASPNET.Migrations
 
                     b.Property<string>("Faculty")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("HasDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Hobbies")
                         .HasColumnType("nvarchar(max)");
@@ -846,8 +868,8 @@ namespace EduHomeASPNET.Migrations
             modelBuilder.Entity("EduHomeASPNET.Models.Skill", b =>
                 {
                     b.HasOne("EduHomeASPNET.Models.Teacher", "Teacher")
-                        .WithMany("Skills")
-                        .HasForeignKey("TeacherId")
+                        .WithOne("Skill")
+                        .HasForeignKey("EduHomeASPNET.Models.Skill", "TeacherId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

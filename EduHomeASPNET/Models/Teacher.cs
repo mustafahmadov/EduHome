@@ -24,10 +24,13 @@ namespace EduHomeASPNET.Models
         public string Email { get; set; }
         public string Phone { get; set; }
         public string Skype { get; set; }
+        public  bool HasDeleted { get; set; }
+        public DateTime DeletedTime { get; set; }
         [Required]
         public string Image { get; set; }
         public int TeacherDetailId { get; set; }
         public TeacherDetail TeacherDetail { get; set; }
-        public virtual ICollection<Skill> Skills { get; set; }
+        public int SkillId { get; set; }
+        public Skill Skill { get; set; }
     }
 }
