@@ -34,8 +34,10 @@ namespace EduHomeASPNET.Controllers
                 RightNotices = _context.RightNotices.ToList(),
                 Choose = _context.Chooses.FirstOrDefault(),
                 Courses = _context.Courses.Where(c => c.HasDeleted == false).Take(3).ToList(),
-                Events = _context.Events.Include(e=>e.EventDetail)
-                      .Where(e=>e.HasDeleted==false&& e.ExperiedDate==false).Take(8).ToList(),
+                Events = _context.Events.Include(e => e.EventDetail)
+                      .Where(e => e.HasDeleted == false && e.ExperiedDate == false).Take(8).ToList(),
+                Blogs = _context.Blogs.Include(b => b.Author).Where(b => b.HasDeleted==false).OrderByDescending(b => b.Id).Take(3).ToList(),
+                
             };
             return View(homeVM);
         }

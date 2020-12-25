@@ -243,3 +243,4 @@ C:\Users\musta\Desktop\EduHome\EduHomeASPNET\obj\Debug\netcoreapp3.1\EduHomeASPN
 C:\Users\musta\Desktop\EduHome\EduHomeASPNET\obj\Debug\netcoreapp3.1\Razor\Views\Teacher\Index.cshtml.g.cs
 C:\Users\musta\Desktop\EduHome\EduHomeASPNET\obj\Debug\netcoreapp3.1\Razor\Views\Course\Index.cshtml.g.cs
 C:\Users\musta\Desktop\EduHome\EduHomeASPNET\obj\Debug\netcoreapp3.1\Razor\Views\Teacher\TeacherDetail.cshtml.g.cs
+C:\Users\musta\Desktop\EduHome\EduHomeASPNET\obj\Debug\netcoreapp3.1\Razor\Views\Blog\Index.cshtml.g.cs
