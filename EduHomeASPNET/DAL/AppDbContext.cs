@@ -28,6 +28,9 @@ namespace EduHomeASPNET.DAL
         public DbSet<Subscribe> Subscribes { get; set; }
         public DbSet<About> Abouts { get; set; }
         public DbSet<Video> Videos { get; set; }
+        public DbSet<Teacher> Teachers { get; set; }
+        public DbSet<TeacherDetail> TeacherDetails { get; set; }
+        public DbSet<Skill> Skills { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Course>()
@@ -44,6 +47,11 @@ namespace EduHomeASPNET.DAL
                 .HasOne(b => b.BlogDetail)
                 .WithOne(b => b.Blog)
                 .HasForeignKey<BlogDetail>(BlogDetail => BlogDetail.BlogId);
+
+            modelBuilder.Entity<Teacher>()
+                .HasOne(t => t.TeacherDetail)
+                .WithOne(t => t.Teacher)
+                .HasForeignKey<TeacherDetail>(TeacherDetail => TeacherDetail.TeacherId);
 
             modelBuilder.Entity<Event>().HasData(
                 new Event
