@@ -12,7 +12,7 @@ namespace EduHomeASPNET.DAL
         public AppDbContext(DbContextOptions<AppDbContext> options):base(options){}
         public DbSet<Slider> Sliders { get; set; }
         public DbSet<Bio> Bios { get; set; }
-        public DbSet<LeftNotice> LeftNotices { get; set; }
+        public DbSet<Notice> LeftNotices { get; set; }
         public DbSet<RightNotice> RightNotices { get; set; }
         public DbSet<Choose> Chooses { get; set; }
         public DbSet<Course> Courses { get; set; }
@@ -27,6 +27,7 @@ namespace EduHomeASPNET.DAL
         public DbSet<Author> Authors { get; set; }
         public DbSet<Subscribe> Subscribes { get; set; }
         public DbSet<About> Abouts { get; set; }
+        public DbSet<Video> Videos { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Course>()

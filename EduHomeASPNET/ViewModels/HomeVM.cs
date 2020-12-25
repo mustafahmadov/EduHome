@@ -9,7 +9,7 @@ namespace EduHomeASPNET.ViewModels
     public class HomeVM
     {
         public List<Slider> Sliders { get; set; }
-        public List<LeftNotice> LeftNotices { get; set; }
+        public List<Notice> LeftNotices { get; set; }
         public List<RightNotice> RightNotices { get; set; }
 
         public Choose Choose { get; set; }
@@ -18,5 +18,6 @@ namespace EduHomeASPNET.ViewModels
         public List<Event> Events { get; set; }
         public List<EventDetail> EventDetails { get; set; }
         public About About { get; set; }
+        public Video Video { get; set; }
     }
 }

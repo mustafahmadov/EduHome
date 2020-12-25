@@ -23,6 +23,7 @@ namespace EduHomeASPNET.Controllers
             HomeVM homeVM = new HomeVM()
             {
                 About = _context.Abouts.FirstOrDefault(),
+                Video = _context.Videos.FirstOrDefault(),
             };
 
             return View(homeVM);

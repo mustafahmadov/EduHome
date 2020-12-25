@@ -39,27 +39,15 @@
 <section class="notice-area pt-150 pb-150">
     <div class="container">
         <div class="row">
-            <div class="col-md-6 col-sm-6 col-xs-12">
-                <div class="notice-left">
-                    <h3>notice board</h3>
-                    @foreach (LeftNotice lf in Model.LeftNotices)
-                    {
-                        <div class="single-notice-left mb-50 pb-25">
-                            <h4>@lf.Time</h4>
-                            <p>@lf.Content</p>
-                        </div>
-                    }
-                </div>
-            </div>
+            @await Component.InvokeAsync("Notice", 9)
             <div class="col-md-6 col-sm-6 col-xs-12">
                 <div class="notice-right">
                     @foreach (RightNotice rn in Model.RightNotices)
                     {
-                        <div class="single-notice-right mb-25 pb-20">
-                            <h3>@rn.Title</h3>
-                            <p>@rn.Content</p>
-                        </div>
-                    }
+        <div class="single-notice-right mb-25 pb-20">
+            <h3>@rn.Title</h3>
+            <p>@rn.Content</p>
+        </div>}
                 </div>
             </div>
         </div>
