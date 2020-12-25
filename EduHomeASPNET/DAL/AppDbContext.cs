@@ -26,6 +26,7 @@ namespace EduHomeASPNET.DAL
         public DbSet<BlogDetail> BlogDetails { get; set; }
         public DbSet<Author> Authors { get; set; }
         public DbSet<Subscribe> Subscribes { get; set; }
+        public DbSet<About> Abouts { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Course>()

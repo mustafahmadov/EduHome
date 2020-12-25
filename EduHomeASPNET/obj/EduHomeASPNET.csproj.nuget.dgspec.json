@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\musta\\source\\repos\\EduHomeASPNET\\EduHomeASPNET\\EduHomeASPNET.csproj": {}
+    "C:\\Users\\musta\\Desktop\\EduHome\\EduHomeASPNET\\EduHomeASPNET.csproj": {}
   },
   "projects": {
-    "C:\\Users\\musta\\source\\repos\\EduHomeASPNET\\EduHomeASPNET\\EduHomeASPNET.csproj": {
+    "C:\\Users\\musta\\Desktop\\EduHome\\EduHomeASPNET\\EduHomeASPNET.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\musta\\source\\repos\\EduHomeASPNET\\EduHomeASPNET\\EduHomeASPNET.csproj",
+        "projectUniqueName": "C:\\Users\\musta\\Desktop\\EduHome\\EduHomeASPNET\\EduHomeASPNET.csproj",
         "projectName": "EduHomeASPNET",
-        "projectPath": "C:\\Users\\musta\\source\\repos\\EduHomeASPNET\\EduHomeASPNET\\EduHomeASPNET.csproj",
+        "projectPath": "C:\\Users\\musta\\Desktop\\EduHome\\EduHomeASPNET\\EduHomeASPNET.csproj",
         "packagesPath": "C:\\Users\\musta\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\musta\\source\\repos\\EduHomeASPNET\\EduHomeASPNET\\obj\\",
+        "outputPath": "C:\\Users\\musta\\Desktop\\EduHome\\EduHomeASPNET\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\musta\\AppData\\Roaming\\NuGet\\NuGet.Config",

@@ -17,5 +17,6 @@ namespace EduHomeASPNET.ViewModels
         public List<CourseDetail> CourseDetails { get; set; }
         public List<Event> Events { get; set; }
         public List<EventDetail> EventDetails { get; set; }
+        public About About { get; set; }
     }
 }

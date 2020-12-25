@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "7SXHMNYk08eq1KkBQHJTZo0TTslzhUfGhCVX5NuUooZCeAL24YP07qaZxGSbnbX8u9HkIlXWYdlIlU5TsWUG4g==",
+  "dgSpecHash": "IV/zbUgYFDcuJbi5GCF1D44IF8rvBY9rYSVi/Ux+MBYo+rmIg3MHSh3GMexDv8omIBMKwG/erbCtTggg09Htcg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\musta\\source\\repos\\EduHomeASPNET\\EduHomeASPNET\\EduHomeASPNET.csproj",
+  "projectFilePath": "C:\\Users\\musta\\Desktop\\EduHome\\EduHomeASPNET\\EduHomeASPNET.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\musta\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
     "C:\\Users\\musta\\.nuget\\packages\\microsoft.bcl.hashcode\\1.1.0\\microsoft.bcl.hashcode.1.1.0.nupkg.sha512",
