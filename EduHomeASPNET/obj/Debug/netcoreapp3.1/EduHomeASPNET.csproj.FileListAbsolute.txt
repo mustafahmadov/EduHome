@@ -240,3 +240,6 @@ C:\Users\musta\Desktop\EduHome\EduHomeASPNET\bin\Debug\netcoreapp3.1\zh-Hans\Mic
 C:\Users\musta\Desktop\EduHome\EduHomeASPNET\bin\Debug\netcoreapp3.1\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Users\musta\Desktop\EduHome\EduHomeASPNET\obj\Debug\netcoreapp3.1\EduHomeASPNET.csproj.CoreCompileInputs.cache
 C:\Users\musta\Desktop\EduHome\EduHomeASPNET\obj\Debug\netcoreapp3.1\EduHomeASPNET.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\musta\Desktop\EduHome\EduHomeASPNET\obj\Debug\netcoreapp3.1\Razor\Views\Teacher\Index.cshtml.g.cs
+C:\Users\musta\Desktop\EduHome\EduHomeASPNET\obj\Debug\netcoreapp3.1\Razor\Views\Course\Index.cshtml.g.cs
+C:\Users\musta\Desktop\EduHome\EduHomeASPNET\obj\Debug\netcoreapp3.1\Razor\Views\Teacher\TeacherDetail.cshtml.g.cs

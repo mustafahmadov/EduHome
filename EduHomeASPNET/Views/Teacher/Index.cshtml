@@ -1,7 +1,16 @@
 ﻿
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "OUR TEACHERS";
 }
 
-<h2>Index</h2>
+
+
+<div class="teacher-area pt-150 pb-105">
+    <div class="container">
+        <div class="row">
+            @await Component.InvokeAsync("Teacher", 8)
+        </div>
+    </div>
+</div>
+
 
