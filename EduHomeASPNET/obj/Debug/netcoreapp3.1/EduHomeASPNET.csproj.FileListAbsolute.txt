@@ -247,3 +247,4 @@ C:\Users\musta\Desktop\EduHome\EduHomeASPNET\obj\Debug\netcoreapp3.1\Razor\Views
 C:\Users\musta\Desktop\EduHome\EduHomeASPNET\obj\Debug\netcoreapp3.1\Razor\Views\Event\Index.cshtml.g.cs
 C:\Users\musta\Desktop\EduHome\EduHomeASPNET\obj\Debug\netcoreapp3.1\Razor\Views\Blog\BlogDetail.cshtml.g.cs
 C:\Users\musta\Desktop\EduHome\EduHomeASPNET\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Components\Sidebar\Default.cshtml.g.cs
+C:\Users\musta\Desktop\EduHome\EduHomeASPNET\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Components\Reply\Default.cshtml.g.cs

@@ -1,4 +1,5 @@
-﻿<div class="blog-sidebar right">
+﻿@model SidebarVM
+<div class="blog-sidebar right">
     <div class="single-blog-widget mb-47">
         <h3>search</h3>
         <div class="blog-search">
@@ -13,12 +14,10 @@
     <div class="single-blog-widget mb-47">
         <h3>categories</h3>
         <ul>
-            <li><a href="#">CSS Engineering (10)</a></li>
-            <li><a href="#">Political Science (12)</a></li>
-            <li><a href="#">Micro Biology (08)</a></li>
-            <li><a href="#">HTML5 &amp; CSS3 (15)</a></li>
-            <li><a href="#">Web Design (20)</a></li>
-            <li><a href="#">PHP (23)</a></li>
+            @foreach (Category category in Model.Categories)
+            {
+                <li><a href="#">@category.Name</a></li>
+            }
         </ul>
     </div>
     <div class="single-blog-widget mb-47">
@@ -29,48 +28,23 @@
     </div>
     <div class="single-blog-widget mb-47">
         <h3>latest post</h3>
-        <div class="single-post mb-30">
-            <div class="single-post-img">
-                <a href="blog-details.html">
-                    <img src="~/assets/img/post/post1.jpg" alt="post">
-                    <div class="blog-hover">
-                        <i class="fa fa-link"></i>
-                    </div>
-                </a>
+        @foreach (Blog blog in Model.Blogs)
+        {
+            <div class="single-post mb-30">
+                <div class="single-post-img">
+                    <a href="blog-details.html">
+                        <img src="~/assets/img/blog/@blog.Image" alt="post" style="width:100px;height:80px">
+                        <div class="blog-hover">
+                            <i class="fa fa-link"></i>
+                        </div>
+                    </a>
+                </div>
+                <div class="single-post-content">
+                    <h4><a href="blog-details.html">@blog.Description</a></h4>
+                    <p>@blog.Author.FullName  /  June 20, 2017</p>
+                </div>
             </div>
-            <div class="single-post-content">
-                <h4><a href="blog-details.html">English Language Course for you</a></h4>
-                <p>By Alex  /  June 20, 2017</p>
-            </div>
-        </div>
-        <div class="single-post mb-30">
-            <div class="single-post-img">
-                <a href="blog-details.html">
-                    <img src="~/assets/img/post/post2.jpg" alt="post">
-                    <div class="blog-hover">
-                        <i class="fa fa-link"></i>
-                    </div>
-                </a>
-            </div>
-            <div class="single-post-content">
-                <h4><a href="blog-details.html">Advance Web Design and Develop</a></h4>
-                <p>By Alex  /  June 20, 2017</p>
-            </div>
-        </div>
-        <div class="single-post">
-            <div class="single-post-img">
-                <a href="blog-details.html">
-                    <img src="~/assets/img/post/post3.jpg" alt="post">
-                    <div class="blog-hover">
-                        <i class="fa fa-link"></i>
-                    </div>
-                </a>
-            </div>
-            <div class="single-post-content">
-                <h4><a href="blog-details.html">English Language Course for you</a></h4>
-                <p>By Alex  /  June 20, 2017</p>
-            </div>
-        </div>
+        }
     </div>
     <div class="single-blog-widget">
         <h3>tags</h3>

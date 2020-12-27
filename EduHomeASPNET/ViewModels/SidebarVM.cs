@@ -9,6 +9,7 @@ namespace EduHomeASPNET.ViewModels
     public class SidebarVM
     {
         public List<Blog> Blogs { get; set; }
+        public List<Category> Categories { get; set; }
 
     }
 }

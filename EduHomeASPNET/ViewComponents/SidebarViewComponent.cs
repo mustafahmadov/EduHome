@@ -1,5 +1,7 @@
 ﻿using EduHomeASPNET.DAL;
+using EduHomeASPNET.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +18,12 @@ namespace EduHomeASPNET.ViewComponents
         }
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            return View(await Task.FromResult(_context));
+            SidebarVM sidebar = new SidebarVM()
+            {
+                Blogs = _context.Blogs.Include(b=>b.Author).Where(b => b.HasDeleted == false).OrderByDescending(b => b.Id).Take(3).ToList(),
+                Categories = _context.Categories.Where(c => c.HasDeleted == false).Take(6).ToList()
+            };
+            return View(await Task.FromResult(sidebar));
         }
     }
 }
