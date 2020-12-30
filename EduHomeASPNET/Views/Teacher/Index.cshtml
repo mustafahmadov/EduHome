@@ -7,28 +7,22 @@
 
 <div class="teacher-area pt-150 pb-105">
     <div class="container">
-        <div class="row">
-            @foreach (Teacher teacher in Model)
-            {
-                <div class="col-md-3 col-sm-4 col-xs-12">
-                    <div class="single-teacher">
-                        <div class="single-teacher-img">
-                            <a asp-controller="Teacher" asp-action="TeacherDetail" asp-route-id="@teacher.Id"><img src="~/assets/img/teacher/@teacher.Image" alt="teacher"></a>
-                        </div>
-                        <div class="single-teacher-content text-center">
-                            <h2><a asp-controller="Teacher" asp-action="TeacherDetail" asp-route-id="@teacher.Id">@teacher.Name @teacher.Surname</a></h2>
-                            <h4>@teacher.Profession</h4>
-                            <ul>
-                                <li><a href="@teacher.Facebook"><i class="zmdi zmdi-facebook"></i></a></li>
-                                <li><a href="@teacher.Pinterest"><i class="zmdi zmdi-pinterest"></i></a></li>
-                                <li><a href="@teacher.Vimeo"><i class="zmdi zmdi-vimeo"></i></a></li>
-                                <li><a href="@teacher.Twitter"><i class="zmdi zmdi-twitter"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            }
+        <div class="course-title">
+            <h3>search teachers</h3>
+        </div>
+        <div class="course-form">
+            <form id="searchTeacher" action="#">
+                <ul id="searchList">
+                    <li class="d-flex px-3">
+                        <input type="text" placeholder="Search..." name="search" id="input-search" />
+                    </li>
+                </ul>
 
+                <button type="submit">search</button>
+            </form>
+        </div>
+        <div class="row" id="teacherArea">
+            @await Component.InvokeAsync("Teacher", new { page = ViewBag.Page, take = 8 })
         </div>
         <nav aria-label="..." class="justify-content-center">
             <ul class="pagination pagination-sm">
@@ -43,7 +37,7 @@
                     else
                     {
                         <li class="page-item">
-                            <a class="page-link" asp-controller="Teacher" asp-action="Index" asp-route-page="@i" >@i</a>
+                            <a class="page-link" asp-controller="Teacher" asp-action="Index" asp-route-page="@i">@i</a>
                         </li>
                     }
                 }
@@ -51,5 +45,25 @@
         </nav>
     </div>
 </div>
+@section Scripts{
+    <script>
+    $(document).on('submit', '#searchTeacher', function () {
+        let search = $("#input-search").val().trim();
+        //$("#searchList li").slice(1).remove();
+        $("#teacherArea").html("");
+        if (search.length > 0) {
+            $.ajax({
+                url: "/Teacher/Search?search=" + search,
+                type: "Get",
+                success: function (res) {
+                    //$("#teacherArea").InnerHTML = "";
+                    $("#teacherArea").append(res);
+                }
+            })
+        }
+    })
+    </script>
+
+}
 
 

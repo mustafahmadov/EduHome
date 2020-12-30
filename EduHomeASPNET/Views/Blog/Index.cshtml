@@ -1,7 +1,58 @@
-﻿
+﻿@model List<Blog>
 @{
     ViewData["Title"] = "Blog";
 }
+<div class="blog-area pt-150 pb-150">
+    <div class="container">
+        <div class="row">
+            @await Component.InvokeAsync("Blog", new { page = ViewBag.Page, take = 6 })
+        </div>
+        <div class="row">
+                <div class="col-xs-12 text-center">
+                    <div class="pagination d-flex justify-content-center align-item-center text-center">
+                        <ul>
+                            @for (int i = 1; i <= ViewBag.PageCount; i++)
+                            {
+                                if (i == ViewBag.Page)
+                                {
+                                    <li class="disabled page-item">
+                                        <a class="page-link" href="#">@i</a>
+                                    </li>
+                                }
+                                else
+                                {
+                                    <li class="page-item">
+                                        <a class="page-link" asp-controller="Blog" asp-action="Index" asp-route-page="@i">@i</a>
+                                    </li>
+                                }
+                            }
 
+                        </ul>
+                    </div>
+                </div>
+            </div>
 
-
+    </div>
+    @*<nav aria-label="..." class="justify-content-center">
+        <ul class="pagination pagination-sm">
+            @for (int i = 1; i <= ViewBag.PageCount; i++)
+            {
+                if (i == ViewBag.Page)
+                {
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#">@i</a>
+                    </li>
+                }
+                else
+                {
+                    <li class="page-item">
+                        <a class="page-link" asp-controller="Blog" asp-action="Index" asp-route-page="@i">@i</a>
+                    </li>
+                }
+            }
+        </ul>
+    </nav>*@
+</div>
+@*<li><a href="#">1</a></li>
+    <li><a href="#">2</a></li>
+    <li><a href="#">3</a></li>*@

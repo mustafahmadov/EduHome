@@ -25,5 +25,6 @@ namespace EduHomeASPNET.Models
         public EventDetail EventDetail { get; set; }
 
 
+
     }
 }

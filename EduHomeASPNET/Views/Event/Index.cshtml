@@ -1,4 +1,4 @@
-﻿
+﻿@model List<Event>
 @{
     ViewData["Title"] = "Events";
 }
@@ -6,31 +6,35 @@
 <div class="event-area three text-center pt-150 pb-150">
     <div class="container">
         <div class="row">
-            <div class="col-md-4 col-sm-6 col-xs-12">
-                <div class="single-event mb-60">
-                    <div class="event-img">
-                        <a href="event-details.html">
-                            <img src="img/event/event5.jpg" alt="event">
-                            <div class="course-hover">
-                                <i class="fa fa-link"></i>
+            @foreach (Event eve in Model)
+            {
+                <div class="col-md-4 col-sm-6 col-xs-12">
+                    <div class="single-event mb-60">
+                        <div class="event-img">
+                            <a asp-controller="Event" asp-action="EventDetail" asp-route-id="@eve.Id">
+                                <img src="~/assets/img/event/@eve.Image" alt="event">
+                                <div class="course-hover">
+                                    <i class="fa fa-link"></i>
+                                </div>
+                            </a>
+                            <div class="event-date">
+                                <h3>20 <span>jun</span></h3>
                             </div>
-                        </a>
-                        <div class="event-date">
-                            <h3>20 <span>jun</span></h3>
                         </div>
-                    </div>
-                    <div class="event-content text-left">
-                        <h4><a href="event-details.html">ADVANCE PHP WORKSHOP</a></h4>
-                        <ul>
-                            <li><span>time:</span> 9.00 AM - 4.45 PM</li>
-                            <li><span>venue</span> New Yourk City</li>
-                        </ul>
-                        <div class="event-content-right">
-                            <a class="default-btn" href="event-details.html">join now</a>
+                        <div class="event-content text-left">
+                            <h4><a href="event-details.html">ADVANCE PHP WORKSHOP</a></h4>
+                            <ul>
+                                <li><span>time:</span> 9.00 AM - 4.45 PM</li>
+                                <li><span>venue</span> New Yourk City</li>
+                            </ul>
+                            <div class="event-content-right">
+                                <a class="default-btn" href="event-details.html">join now</a>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            }
+
             <div class="col-md-4 col-sm-6 col-xs-12">
                 <div class="single-event mb-60">
                     <div class="event-img">

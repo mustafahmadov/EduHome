@@ -676,6 +676,52 @@ namespace EduHomeASPNET.Migrations
                     b.ToTable("Sliders");
                 });
 
+            modelBuilder.Entity("EduHomeASPNET.Models.Speaker", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Fullname")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Image")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Position")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Speakers");
+                });
+
+            modelBuilder.Entity("EduHomeASPNET.Models.SpeakerEvent", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("EventId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SpeakerId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EventId");
+
+                    b.HasIndex("SpeakerId");
+
+                    b.ToTable("SpeakerEvents");
+                });
+
             modelBuilder.Entity("EduHomeASPNET.Models.Student", b =>
                 {
                     b.Property<int>("Id")
@@ -971,6 +1017,21 @@ namespace EduHomeASPNET.Migrations
                     b.HasOne("EduHomeASPNET.Models.Teacher", "Teacher")
                         .WithOne("Skill")
                         .HasForeignKey("EduHomeASPNET.Models.Skill", "TeacherId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("EduHomeASPNET.Models.SpeakerEvent", b =>
+                {
+                    b.HasOne("EduHomeASPNET.Models.Event", "Event")
+                        .WithMany()
+                        .HasForeignKey("EventId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("EduHomeASPNET.Models.Speaker", "Speaker")
+                        .WithMany()
+                        .HasForeignKey("SpeakerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
