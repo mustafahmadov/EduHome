@@ -11,6 +11,7 @@ namespace EduHomeASPNET.Models
         public int Id { get; set; }
 
         public string Duration { get; set; }
+        [Required]
         public string Price { get; set; }
         [Required]
         public string Language { get; set; }

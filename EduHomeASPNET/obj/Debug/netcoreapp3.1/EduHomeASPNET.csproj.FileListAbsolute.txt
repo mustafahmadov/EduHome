@@ -298,3 +298,16 @@ C:\Users\musta\Desktop\EduHome\EduHomeASPNET\obj\Debug\netcoreapp3.1\Razor\Areas
 C:\Users\musta\Desktop\EduHome\EduHomeASPNET\obj\Debug\netcoreapp3.1\Razor\Areas\Administrator\Views\Slider\Create.cshtml.g.cs
 C:\Users\musta\Desktop\EduHome\EduHomeASPNET\obj\Debug\netcoreapp3.1\Razor\Areas\Administrator\Views\Slider\Update.cshtml.g.cs
 C:\Users\musta\Desktop\EduHome\EduHomeASPNET\obj\Debug\netcoreapp3.1\Razor\Areas\Administrator\Views\Slider\Delete.cshtml.g.cs
+C:\Users\musta\Desktop\EduHome\EduHomeASPNET\obj\Debug\netcoreapp3.1\Razor\Areas\Administrator\Views\Course\Index.cshtml.g.cs
+C:\Users\musta\Desktop\EduHome\EduHomeASPNET\obj\Debug\netcoreapp3.1\Razor\Areas\Administrator\Views\Course\Detail.cshtml.g.cs
+C:\Users\musta\Desktop\EduHome\EduHomeASPNET\obj\Debug\netcoreapp3.1\Razor\Areas\Administrator\Views\Blogs\Create.cshtml.g.cs
+C:\Users\musta\Desktop\EduHome\EduHomeASPNET\obj\Debug\netcoreapp3.1\Razor\Areas\Administrator\Views\Blogs\Delete.cshtml.g.cs
+C:\Users\musta\Desktop\EduHome\EduHomeASPNET\obj\Debug\netcoreapp3.1\Razor\Areas\Administrator\Views\Blogs\Details.cshtml.g.cs
+C:\Users\musta\Desktop\EduHome\EduHomeASPNET\obj\Debug\netcoreapp3.1\Razor\Areas\Administrator\Views\Blogs\Edit.cshtml.g.cs
+C:\Users\musta\Desktop\EduHome\EduHomeASPNET\obj\Debug\netcoreapp3.1\Razor\Areas\Administrator\Views\Blogs\Index.cshtml.g.cs
+C:\Users\musta\Desktop\EduHome\EduHomeASPNET\obj\Debug\netcoreapp3.1\Razor\Areas\Administrator\Views\BlogDetails\Create.cshtml.g.cs
+C:\Users\musta\Desktop\EduHome\EduHomeASPNET\obj\Debug\netcoreapp3.1\Razor\Areas\Administrator\Views\BlogDetails\Delete.cshtml.g.cs
+C:\Users\musta\Desktop\EduHome\EduHomeASPNET\obj\Debug\netcoreapp3.1\Razor\Areas\Administrator\Views\BlogDetails\Details.cshtml.g.cs
+C:\Users\musta\Desktop\EduHome\EduHomeASPNET\obj\Debug\netcoreapp3.1\Razor\Areas\Administrator\Views\BlogDetails\Edit.cshtml.g.cs
+C:\Users\musta\Desktop\EduHome\EduHomeASPNET\obj\Debug\netcoreapp3.1\Razor\Areas\Administrator\Views\BlogDetails\Index.cshtml.g.cs
+C:\Users\musta\Desktop\EduHome\EduHomeASPNET\obj\Debug\netcoreapp3.1\Razor\Areas\Administrator\Views\Course\Create.cshtml.g.cs
