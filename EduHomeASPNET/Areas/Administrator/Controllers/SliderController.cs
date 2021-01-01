@@ -73,7 +73,7 @@ namespace EduHomeASPNET.Areas.Administrator.Controllers
                 return RedirectToAction(nameof(Index));
             }
             string folder = Path.Combine("assets", "img", "slider");
-            string fileName = await slider.Photo.SaveImg(_env.WebRootPath,folder);
+            string fileName = await slider.Photo.SaveImgAsync(_env.WebRootPath,folder);
 
             slider.Image = fileName;
             await _context.Sliders.AddAsync(slider);
@@ -147,7 +147,7 @@ namespace EduHomeASPNET.Areas.Administrator.Controllers
                 string folder = Path.Combine("assets", "img", "slider");
                 Helper.DeleteImage(_env.WebRootPath, folder, dbslider.Image);
               
-                string fileName = await slider.Photo.SaveImg(_env.WebRootPath, folder);
+                string fileName = await slider.Photo.SaveImgAsync(_env.WebRootPath, folder);
 
                 dbslider.Image = fileName;
                 dbslider.Title = slider.Title;

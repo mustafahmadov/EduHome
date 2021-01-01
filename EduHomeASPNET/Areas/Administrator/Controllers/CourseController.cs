@@ -1,6 +1,7 @@
 ﻿using EduHomeASPNET.DAL;
 using EduHomeASPNET.Models;
 using FrontToUp.Extentions;
+using FrontToUp.Helpers;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -88,7 +89,7 @@ namespace EduHomeASPNET.Areas.Administrator.Controllers
             }
 
             string folder = Path.Combine("assets", "img", "slider");
-            string fileName = await course.Photo.SaveImg(_env.WebRootPath, folder);
+            string fileName = await course.Photo.SaveImgAsync(_env.WebRootPath, folder);
 
             List<CategoryCourse> categoryCourses = new List<CategoryCourse>();
             List<CourseTag> tagCourses = new List<CourseTag>();
@@ -156,6 +157,69 @@ namespace EduHomeASPNET.Areas.Administrator.Controllers
             await _context.AddAsync(nCourseDetail);
             await _context.SaveChangesAsync();
 
+            return RedirectToAction(nameof(Index));
+        }
+
+        public IActionResult Update(int? id)
+        {
+            Course course = _context.Courses.Where(cr => cr.HasDeleted == false)
+                .Include(cr => cr.CourseDetail).FirstOrDefault(cr => cr.Id == id);
+            return View(course);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Update(int? id, Course course)
+        {
+            if (id == null) return NotFound();
+
+            Course oldCourse = await _context.Courses.Include(c => c.CourseDetail).FirstOrDefaultAsync(c => c.Id == id);
+
+            Course isExist =await _context.Courses.Where(cr => cr.HasDeleted == false).FirstOrDefaultAsync(cr => cr.Id == id);
+
+            if (isExist != null)
+            {
+                if (isExist.Id != oldCourse.Id)
+                {
+                    ModelState.AddModelError("", "Bele bir kurs artiq movcuddur .");
+                    return View();
+                }
+            }
+
+            if (course == null) return NotFound();
+            if (course.Photo != null)
+            {
+                if (!course.Photo.IsImage())
+                {
+                    ModelState.AddModelError("Photos", $"{course.Photo.FileName} - shekil tipi deyil");
+                    return View(oldCourse);
+                }
+
+                string folder = Path.Combine("assets","img","course");
+                string fileName =await course.Photo.SaveImgAsync(_env.WebRootPath, folder);
+                if (fileName == null)
+                {
+                    return NotFound();
+                }
+
+                Helper.DeleteImage(_env.WebRootPath, folder, oldCourse.Image);
+                oldCourse.Image = fileName;
+            }
+
+            oldCourse.Name = course.Name;
+            oldCourse.Description = course.Description;
+            oldCourse.CourseDetail.About = course.CourseDetail.About;
+            oldCourse.CourseDetail.AboutApply = course.CourseDetail.AboutApply;
+            oldCourse.CourseDetail.AboutCertification = course.CourseDetail.AboutCertification;
+            oldCourse.CourseDetail.Duration = course.CourseDetail.Duration;
+            oldCourse.CourseDetail.ClassDuration = course.CourseDetail.ClassDuration;
+            oldCourse.CourseDetail.SkillLevel = course.CourseDetail.SkillLevel;
+            oldCourse.CourseDetail.Language = course.CourseDetail.Language;
+            oldCourse.CourseDetail.StudentsCount = course.CourseDetail.StudentsCount;
+            oldCourse.CourseDetail.StudentsPerGroup = course.CourseDetail.StudentsPerGroup;
+            oldCourse.CourseDetail.Price = course.CourseDetail.Price;
+
+
+            await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
     }

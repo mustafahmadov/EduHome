@@ -19,7 +19,7 @@ namespace FrontToUp.Extentions
             return file.Length/1024 > kb;
         }
 
-        public static async Task<string> SaveImg(this IFormFile file,string root,string folder)
+        public static async Task<string> SaveImgAsync(this IFormFile file,string root,string folder)
         {
             string path = root;
             string fileName = Guid.NewGuid().ToString() + file.FileName;
