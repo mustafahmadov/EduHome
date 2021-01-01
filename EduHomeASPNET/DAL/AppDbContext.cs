@@ -1,4 +1,5 @@
 ﻿using EduHomeASPNET.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace EduHomeASPNET.DAL
 {
-    public class AppDbContext : DbContext
+    public class AppDbContext : IdentityDbContext<AppUser>
     {
         public AppDbContext(DbContextOptions<AppDbContext> options):base(options){}
         public DbSet<Slider> Sliders { get; set; }
@@ -42,6 +43,7 @@ namespace EduHomeASPNET.DAL
         public DbSet<Tag> Tags { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Course>()
             .HasOne(a => a.CourseDetail)
             .WithOne(a => a.Course)
