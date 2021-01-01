@@ -134,11 +134,9 @@ namespace EduHomeASPNET.Areas.Administrator.Controllers
             nCourse.Name = course.Name;
             nCourse.Description = course.Description;
             nCourse.HasDeleted = false;
-            //nCourse.ca
-            //nCourse.TagCourses = tagCourses;
+            
 
             await _context.Courses.AddAsync(nCourse);
-            //await _context.CategoryCourses.AddAsync(categor);
             await _context.SaveChangesAsync();
 
             nCourseDetail.About = course.CourseDetail.About;
@@ -233,7 +231,7 @@ namespace EduHomeASPNET.Areas.Administrator.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ActionName("Delete")]
-        public async Task<IActionResult> DeleteCourse(int? id)
+        public async Task<IActionResult> DeleteEvent(int? id)
         {
             if (id == null) return NotFound();
             Course course = _context.Courses.FirstOrDefault(c => c.Id == id);
@@ -242,7 +240,9 @@ namespace EduHomeASPNET.Areas.Administrator.Controllers
             if (!course.HasDeleted)
             {
                 course.HasDeleted = true;
+                //course.CourseDetail.HasDeleted = true;
                 course.DeletedTime = DateTime.Now;
+                //course.CourseDetail.DeletedTime = DateTime.Now;
             }
             else
                 course.HasDeleted = false;

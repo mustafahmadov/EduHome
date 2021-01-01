@@ -9,7 +9,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace EduHomeASPNET.Controllers
-{
+{ 
+
     public class EventController : Controller
     {
         private readonly AppDbContext _context;
@@ -31,8 +32,7 @@ namespace EduHomeASPNET.Controllers
             EventVM eventVM = new EventVM()
             {
                 Event = await _context.Events.Include(e => e.EventDetail).Where(e => e.HasDeleted == false && e.Id == id).FirstOrDefaultAsync(),
-                Speakers = _context.Speakers. ToList(),
-                //SpeakerEvents = _context.SpeakerEvents.Include(se=>se.EventId).Include(se => se.Event).Include(se => se.Speaker).ToList(),
+                Speakers = _context.Speakers.ToList(),
                 SpeakerEvents = _context.SpeakerEvents.Include(se=>se.Speaker).Where(se=>se.EventId==id).ToList()
             };
            

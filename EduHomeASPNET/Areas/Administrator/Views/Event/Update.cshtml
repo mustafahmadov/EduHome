@@ -1,0 +1,70 @@
+﻿@model Event
+@{ ViewData["Title"] = "Create"; }
+
+<div class="row">
+    <div class="col-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Update Event</h4>
+                <form class="forms-sample" method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label asp-for="Photo"></label>
+                        <input asp-for="Photo" class="form-control" accept="image/*">
+                        <span asp-validation-for="Photo" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Name"></label>
+                        <input asp-for="Name" class="form-control">
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="PlacedArea"></label>
+                        <input asp-for="PlacedArea" class="form-control">
+                        <span asp-validation-for="PlacedArea" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="OrganizedDay"></label>
+                        <input asp-for="OrganizedDay" class="form-control">
+                        <span asp-validation-for="OrganizedDay" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="StartTime"></label>
+                        <input asp-for="StartTime" class="form-control">
+                        <span asp-validation-for="StartTime" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="EndTime"></label>
+                        <input asp-for="EndTime" class="form-control">
+                        <span asp-validation-for="EndTime" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.EventDetail.DetailedPlacedArea"></label>
+                        <input asp-for="@Model.EventDetail.DetailedPlacedArea" class="form-control">
+                        <span asp-validation-for="@Model.EventDetail.DetailedPlacedArea" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.EventDetail.FirstContent"></label>
+                        <input asp-for="@Model.EventDetail.FirstContent" class="form-control">
+                        <span asp-validation-for="@Model.EventDetail.FirstContent" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.EventDetail.SecondContent"></label>
+                        <input asp-for="@Model.EventDetail.SecondContent" class="form-control">
+                        <span asp-validation-for="@Model.EventDetail.SecondContent" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.EventDetail.ThirdContent"></label>
+                        <input asp-for="@Model.EventDetail.ThirdContent" class="form-control">
+                        <span asp-validation-for="@Model.EventDetail.ThirdContent" class="text-danger"></span>
+                    </div>
+                    <button type="submit" class="btn btn-success mr-2">Save</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <partial name="_Validation" />
+}
+
+

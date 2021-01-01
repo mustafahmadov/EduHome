@@ -292,3 +292,7 @@ C:\Users\musta\Desktop\EduHome\EduHomeASPNET\obj\Debug\netcoreapp3.1\EduHomeASPN
 C:\Users\musta\Desktop\EduHome\EduHomeASPNET\obj\Debug\netcoreapp3.1\EduHomeASPNET.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\musta\Desktop\EduHome\EduHomeASPNET\obj\Debug\netcoreapp3.1\Razor\Areas\Administrator\Views\Course\Update.cshtml.g.cs
 C:\Users\musta\Desktop\EduHome\EduHomeASPNET\obj\Debug\netcoreapp3.1\Razor\Areas\Administrator\Views\Course\Delete.cshtml.g.cs
+C:\Users\musta\Desktop\EduHome\EduHomeASPNET\obj\Debug\netcoreapp3.1\Razor\Areas\Administrator\Views\Event\Create.cshtml.g.cs
+C:\Users\musta\Desktop\EduHome\EduHomeASPNET\obj\Debug\netcoreapp3.1\Razor\Areas\Administrator\Views\Event\Update.cshtml.g.cs
+C:\Users\musta\Desktop\EduHome\EduHomeASPNET\obj\Debug\netcoreapp3.1\Razor\Areas\Administrator\Views\Event\Index.cshtml.g.cs
+C:\Users\musta\Desktop\EduHome\EduHomeASPNET\obj\Debug\netcoreapp3.1\Razor\Areas\Administrator\Views\Event\Delete.cshtml.g.cs

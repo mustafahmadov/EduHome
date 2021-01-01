@@ -16,8 +16,6 @@ namespace EduHomeASPNET.Models
         [MaxLength(length: 300)]
         public string ThirdContent { get; set; }
         [Required]
-        public string DetailedImage { get; set; }
-        [Required]
         public string DetailedPlacedArea { get; set; }
         public bool HasDeleted { get; set; }
         public DateTime? DeletedTime{ get; set; }
