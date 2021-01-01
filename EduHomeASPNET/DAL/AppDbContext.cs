@@ -36,6 +36,10 @@ namespace EduHomeASPNET.DAL
         public DbSet<CategoryTeacher> CategoryTeachers { get; set; }
         public DbSet<Speaker> Speakers { get; set; }
         public DbSet<SpeakerEvent> SpeakerEvents { get; set; }
+        public DbSet<BlogTag> BlogTags { get; set; }
+        public DbSet<EventTag> EventTags { get; set; }
+        public DbSet<CourseTag> CourseTags { get; set; }
+        public DbSet<Tag> Tags { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Course>()

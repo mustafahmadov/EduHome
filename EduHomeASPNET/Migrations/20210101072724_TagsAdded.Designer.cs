@@ -4,14 +4,16 @@ using EduHomeASPNET.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EduHomeASPNET.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210101072724_TagsAdded")]
+    partial class TagsAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -184,28 +186,6 @@ namespace EduHomeASPNET.Migrations
                         .IsUnique();
 
                     b.ToTable("BlogDetails");
-                });
-
-            modelBuilder.Entity("EduHomeASPNET.Models.BlogTag", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("BlogId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TagId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("BlogId");
-
-                    b.HasIndex("TagId");
-
-                    b.ToTable("BlogTags");
                 });
 
             modelBuilder.Entity("EduHomeASPNET.Models.Category", b =>
@@ -393,28 +373,6 @@ namespace EduHomeASPNET.Migrations
                         .IsUnique();
 
                     b.ToTable("CourseDetails");
-                });
-
-            modelBuilder.Entity("EduHomeASPNET.Models.CourseTag", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("CourseId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TagId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CourseId");
-
-                    b.HasIndex("TagId");
-
-                    b.ToTable("CourseTags");
                 });
 
             modelBuilder.Entity("EduHomeASPNET.Models.Event", b =>
@@ -605,28 +563,6 @@ namespace EduHomeASPNET.Migrations
                         .IsUnique();
 
                     b.ToTable("EventDetails");
-                });
-
-            modelBuilder.Entity("EduHomeASPNET.Models.EventTag", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("EventId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TagId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("EventId");
-
-                    b.HasIndex("TagId");
-
-                    b.ToTable("EventTags");
                 });
 
             modelBuilder.Entity("EduHomeASPNET.Models.Notice", b =>
@@ -888,27 +824,6 @@ namespace EduHomeASPNET.Migrations
                     b.ToTable("Subscribes");
                 });
 
-            modelBuilder.Entity("EduHomeASPNET.Models.Tag", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime?>("DeletedTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("HasDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Tags");
-                });
-
             modelBuilder.Entity("EduHomeASPNET.Models.Teacher", b =>
                 {
                     b.Property<int>("Id")
@@ -1052,21 +967,6 @@ namespace EduHomeASPNET.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("EduHomeASPNET.Models.BlogTag", b =>
-                {
-                    b.HasOne("EduHomeASPNET.Models.Blog", "Blog")
-                        .WithMany()
-                        .HasForeignKey("BlogId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("EduHomeASPNET.Models.Tag", "Tag")
-                        .WithMany()
-                        .HasForeignKey("TagId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("EduHomeASPNET.Models.CategoryCourse", b =>
                 {
                     b.HasOne("EduHomeASPNET.Models.Category", "Category")
@@ -1106,41 +1006,11 @@ namespace EduHomeASPNET.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("EduHomeASPNET.Models.CourseTag", b =>
-                {
-                    b.HasOne("EduHomeASPNET.Models.Course", "Course")
-                        .WithMany()
-                        .HasForeignKey("CourseId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("EduHomeASPNET.Models.Tag", "Tag")
-                        .WithMany()
-                        .HasForeignKey("TagId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("EduHomeASPNET.Models.EventDetail", b =>
                 {
                     b.HasOne("EduHomeASPNET.Models.Event", "Event")
                         .WithOne("EventDetail")
                         .HasForeignKey("EduHomeASPNET.Models.EventDetail", "EventId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("EduHomeASPNET.Models.EventTag", b =>
-                {
-                    b.HasOne("EduHomeASPNET.Models.Event", "Event")
-                        .WithMany()
-                        .HasForeignKey("EventId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("EduHomeASPNET.Models.Tag", "Tag")
-                        .WithMany()
-                        .HasForeignKey("TagId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

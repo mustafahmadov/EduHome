@@ -38,6 +38,8 @@ namespace EduHomeASPNET.Areas.Administrator.Controllers
         }
         public async Task<IActionResult> Create()
         {
+            ViewBag.Categories = _context.Categories.Where(c=>c.HasDeleted==false).ToList();
+            ViewBag.Tags = _context.Tags.Where(t => t.HasDeleted == false).ToList();
             return View();
         }
         [HttpPost]
