@@ -25,7 +25,8 @@ namespace EduHomeASPNET.Areas.Administrator.Controllers
         }
         public IActionResult Index()
         {
-            List<Course> courses = _context.Courses.Include(c=>c.CourseDetail).Where(c => c.HasDeleted == false).ToList();
+            List<Course> courses = _context.Courses.Where(c => c.HasDeleted == false)
+                .Include(c => c.CourseDetail).ToList();
             return View(courses);
         }
         public async Task<IActionResult> Detail(int? id)
@@ -44,7 +45,7 @@ namespace EduHomeASPNET.Areas.Administrator.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Course course)
+        public async Task<IActionResult> Create(Course course, List<int> TagId,List<int> CategoryId)
         {
             Course nCourse = new Course();
             CourseDetail nCourseDetail = new CourseDetail();
@@ -89,12 +90,54 @@ namespace EduHomeASPNET.Areas.Administrator.Controllers
             string folder = Path.Combine("assets", "img", "slider");
             string fileName = await course.Photo.SaveImg(_env.WebRootPath, folder);
 
+            List<CategoryCourse> categoryCourses = new List<CategoryCourse>();
+            List<CourseTag> tagCourses = new List<CourseTag>();
+            
+            if (CategoryId.Count == 0)
+            {
+                ModelState.AddModelError("", "Kategoriya bosh ola bilmez");
+                return View();
+            }
+
+            foreach (int id in CategoryId)
+            {
+                CategoryCourse categoryCourse = new CategoryCourse()
+                {
+                    CourseId = nCourse.Id,
+                    CategoryId = id,
+                    Course = nCourse,
+
+                };
+                categoryCourses.Add(categoryCourse);
+                await _context.CategoryCourses.AddAsync(categoryCourse);
+            }
+
+            if (TagId.Count == 0)
+            {
+                ModelState.AddModelError("", "Tag bosh ola bilmez");
+                return View();
+            }
+
+            foreach (int id in TagId)
+            {
+                CourseTag courseTag = new CourseTag()
+                {
+                    CourseId = nCourse.Id,
+                    TagId = id,
+                    Course = nCourse,
+                };
+                tagCourses.Add(courseTag);
+                await _context.CourseTags.AddAsync(courseTag);
+            }
             nCourse.Image = fileName;
             nCourse.Name = course.Name;
             nCourse.Description = course.Description;
             nCourse.HasDeleted = false;
-            
+            //nCourse.ca
+            //nCourse.TagCourses = tagCourses;
+
             await _context.Courses.AddAsync(nCourse);
+            //await _context.CategoryCourses.AddAsync(categor);
             await _context.SaveChangesAsync();
 
             nCourseDetail.About = course.CourseDetail.About;
