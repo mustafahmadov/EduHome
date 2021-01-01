@@ -222,5 +222,33 @@ namespace EduHomeASPNET.Areas.Administrator.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null) return NotFound();
+            Course course = await _context.Courses.FindAsync(id);
+            if (course == null) return NotFound();
+            return View(course);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [ActionName("Delete")]
+        public async Task<IActionResult> DeleteCourse(int? id)
+        {
+            if (id == null) return NotFound();
+            Course course = _context.Courses.FirstOrDefault(c => c.Id == id);
+            if (course == null) return NotFound();
+
+            if (!course.HasDeleted)
+            {
+                course.HasDeleted = true;
+                course.DeletedTime = DateTime.Now;
+            }
+            else
+                course.HasDeleted = false;
+
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
