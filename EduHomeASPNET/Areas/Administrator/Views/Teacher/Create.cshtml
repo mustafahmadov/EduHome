@@ -1,0 +1,142 @@
+﻿@model EduHomeASPNET.Models.Teacher
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>Create</h2>
+
+<h4>Teacher</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Photo" class="control-label"></label>
+                <input asp-for="Photo" class="form-control" />
+                <span asp-validation-for="Photo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Surname" class="control-label"></label>
+                <input asp-for="Surname" class="form-control" />
+                <span asp-validation-for="Surname" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Age" class="control-label"></label>
+                <input asp-for="Age" class="form-control" />
+                <span asp-validation-for="Age" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Profession" class="control-label"></label>
+                <input asp-for="Profession" class="form-control" />
+                <span asp-validation-for="Profession" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Facebook" class="control-label"></label>
+                <input asp-for="Facebook" class="form-control" />
+                <span asp-validation-for="Facebook" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Pinterest" class="control-label"></label>
+                <input asp-for="Pinterest" class="form-control" />
+                <span asp-validation-for="Pinterest" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Vimeo" class="control-label"></label>
+                <input asp-for="Vimeo" class="form-control" />
+                <span asp-validation-for="Vimeo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Twitter" class="control-label"></label>
+                <input asp-for="Twitter" class="form-control" />
+                <span asp-validation-for="Twitter" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Phone" class="control-label"></label>
+                <input asp-for="Phone" class="form-control" />
+                <span asp-validation-for="Phone" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.TeacherDetail.Degree" class="control-label"></label>
+                <input asp-for="@Model.TeacherDetail.Degree" class="form-control" />
+                <span asp-validation-for="@Model.TeacherDetail.Degree" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.TeacherDetail.Description" class="control-label"></label>
+                <input asp-for="@Model.TeacherDetail.Description" class="form-control" />
+                <span asp-validation-for="@Model.TeacherDetail.Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.TeacherDetail.Experience" class="control-label"></label>
+                <input asp-for="@Model.TeacherDetail.Experience" class="form-control" />
+                <span asp-validation-for="@Model.TeacherDetail.Experience" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.TeacherDetail.Hobbies" class="control-label"></label>
+                <input asp-for="@Model.TeacherDetail.Hobbies" class="form-control" />
+                <span asp-validation-for="@Model.TeacherDetail.Hobbies" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Skill.Innovation" class="control-label"></label>
+                <input min="0" max="100" asp-for="@Model.Skill.Innovation" class="form-control" />
+                <span asp-validation-for="@Model.Skill.Innovation" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Skill.Design" class="control-label"></label>
+                <input min="0" max="100" asp-for="@Model.Skill.Design" class="form-control" />
+                <span asp-validation-for="@Model.Skill.Design" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Skill.Development" class="control-label"></label>
+                <input min="0" max="100" asp-for="@Model.Skill.Development" class="form-control" />
+                <span asp-validation-for="@Model.Skill.Development" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Skill.TeamLeader" class="control-label"></label>
+                <input min="0" max="100" asp-for="@Model.Skill.TeamLeader" class="form-control" />
+                <span asp-validation-for="@Model.Skill.TeamLeader" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Skill.Language" class="control-label"></label>
+                <input min="0" max="100" asp-for="@Model.Skill.Language" class="form-control" />
+                <span asp-validation-for="@Model.Skill.Language" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Skill.Communication" class="control-label"></label>
+                <input min="0" max="100" asp-for="@Model.Skill.Communication" class="form-control" />
+                <span asp-validation-for="@Model.Skill.Communication" class="text-danger"></span>
+            </div>
+            <div class="col-md-6">
+                <h4 class="text-info">Categories</h4>
+                @foreach (Category category in ViewBag.Categories)
+                {
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="CategoryId" value="@category.Id">
+            <label class="form-check-label">
+                @category.Name
+            </label>
+        </div>}
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

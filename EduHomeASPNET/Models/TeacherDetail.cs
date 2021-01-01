@@ -9,8 +9,6 @@ namespace EduHomeASPNET.Models
     public class TeacherDetail
     {
         public int Id { get; set; }
-        [Required]
-        public string DetailedImage { get; set; }
         public string Description { get; set; }
         public string Degree { get; set; }
         public string Hobbies { get; set; }
