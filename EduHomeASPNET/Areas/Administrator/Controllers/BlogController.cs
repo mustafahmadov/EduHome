@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using EduHomeASPNET.DAL;
 using EduHomeASPNET.Models;
+using FrontToUp.Extentions;
+using FrontToUp.Helpers;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -34,7 +37,7 @@ namespace EduHomeASPNET.Areas.Administrator.Controllers
         public async Task<ActionResult> Detail(int? id)
         {
             if (id == null) return NotFound();
-            Blog blog = await _context.Blogs.Include(c => c.BlogDetail).FirstOrDefaultAsync(c => c.Id == id);
+            Blog blog = await _context.Blogs.Include(c => c.BlogDetail).Include(b=>b.Author).FirstOrDefaultAsync(c => c.Id == id);
             if (blog == null) return NotFound();
 
             return View(blog);
@@ -49,51 +52,37 @@ namespace EduHomeASPNET.Areas.Administrator.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Blog eve, List<int> TagId, List<int> SpeakerId)
+        public async Task<IActionResult> Create(Blog blog,int? AuthorId, List<int> TagId)
         {
             ViewBag.Tags = _context.Tags.Where(t => t.HasDeleted == false).ToList();
-            ViewBag.Speakers = _context.Speakers.ToList();
+            ViewBag.Authors = _context.Authors.ToList();
             Blog newBlog = new Blog();
             BlogDetail newBlogDetail = new BlogDetail();
-            if (eve.Photo == null)
+            if (blog.Photo == null)
             {
                 ModelState.AddModelError("Photo", "Shekil bolmesi bosh qala bilmez!");
                 return View();
             }
-            if (eve.Name == null)
-            {
-                ModelState.AddModelError("Name", "Zehmet olmasa kursunuzun adini daxil edin");
-                return View();
-            }
-            if (eve.PlacedArea == null)
-            {
-                ModelState.AddModelError("PlacedArea", " Mekani daxil edin");
-                return View();
-            }
-            if (eve.BlogDetail.DetailedPlacedArea == null)
-            {
-                ModelState.AddModelError("DetailedPlacedArea", "Detalli mekani daxil edin");
-                return View();
-            }
 
-            if (!eve.Photo.IsImage())
+            if (!blog.Photo.IsImage())
             {
                 ModelState.AddModelError("Photo", "Zehmet olmasa shekil formati sechin");
                 return View();
             }
 
-            if (eve.Photo.MaxLength(200))
+            if (blog.Photo.MaxLength(200))
             {
                 ModelState.AddModelError("Photo", "Sheklin maksimum olcusu 200 kb ola biler");
                 return View();
             }
 
-            string folder = Path.Combine("assets", "img", "Blog");
-            string fileName = await eve.Photo.SaveImgAsync(_env.WebRootPath, folder);
+            string folder = Path.Combine("assets", "img", "blog");
+            string fileName = await blog.Photo.SaveImgAsync(_env.WebRootPath, folder);
+
+            
 
             List<BlogTag> BlogTags = new List<BlogTag>();
-            List<SpeakerBlog> speakerBlogs = new List<SpeakerBlog>();
-
+            
             if (TagId.Count == 0)
             {
                 ModelState.AddModelError("", "Tag bosh ola bilmez");
@@ -111,40 +100,22 @@ namespace EduHomeASPNET.Areas.Administrator.Controllers
                 BlogTags.Add(BlogTag);
                 await _context.BlogTags.AddAsync(BlogTag);
             }
-            if (SpeakerId.Count == 0)
-            {
-                ModelState.AddModelError("", "Speaker bosh ola bilmez");
-                return View();
-            }
-
-            foreach (int id in SpeakerId)
-            {
-                SpeakerBlog speakerBlog = new SpeakerBlog()
-                {
-                    BlogId = newBlog.Id,
-                    SpeakerId = id,
-                    Blog = newBlog
-                };
-                speakerBlogs.Add(speakerBlog);
-                await _context.SpeakerBlogs.AddAsync(speakerBlog);
-            }
+            newBlog.AuthorId = (int)AuthorId;
+            //newBlog.AuthorId = blog.Author.Id;
             newBlog.Image = fileName;
-            newBlog.Name = eve.Name;
-            newBlog.OrganizedDay = eve.OrganizedDay;
-            newBlog.HasDeleted = false;
-            newBlog.PlacedArea = eve.PlacedArea;
-            newBlog.StartTime = eve.StartTime;
-            newBlog.EndTime = eve.EndTime;
+            newBlog.Description = blog.Description;
+            newBlog.CommentsCount = 0;
+            newBlog.PostedTime = DateTime.UtcNow;
             newBlog.BlogDetailId = newBlogDetail.Id;
 
             await _context.Blogs.AddAsync(newBlog);
             await _context.SaveChangesAsync();
 
             newBlogDetail.HasDeleted = false;
-            newBlogDetail.DetailedPlacedArea = eve.BlogDetail.DetailedPlacedArea;
-            newBlogDetail.FirstContent = eve.BlogDetail.FirstContent;
-            newBlogDetail.SecondContent = eve.BlogDetail.SecondContent;
-            newBlogDetail.ThirdContent = eve.BlogDetail.ThirdContent;
+            newBlogDetail.FirstContent = blog.BlogDetail.FirstContent;
+            newBlogDetail.SecondContent = blog.BlogDetail.SecondContent;
+            newBlogDetail.ThirdContent = blog.BlogDetail.ThirdContent;
+            newBlogDetail.FourthContent = blog.BlogDetail.FourthContent;
             newBlogDetail.BlogId = newBlog.Id;
             newBlog.BlogDetailId = newBlogDetail.Id;
 
@@ -159,13 +130,13 @@ namespace EduHomeASPNET.Areas.Administrator.Controllers
         // GET: BlogController/Edit/5
         public IActionResult Update(int? id)
         {
-            Blog eve = _context.Blogs.Where(cr => cr.HasDeleted == false)
+            Blog blog = _context.Blogs.Where(cr => cr.HasDeleted == false)
                 .Include(cr => cr.BlogDetail).FirstOrDefault(cr => cr.Id == id);
-            return View(eve);
+            return View(blog);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Update(int? id, Blog eve)
+        public async Task<IActionResult> Update(int? id, Blog blog)
         {
             if (id == null) return NotFound();
 
@@ -182,17 +153,17 @@ namespace EduHomeASPNET.Areas.Administrator.Controllers
                 }
             }
 
-            if (eve == null) return NotFound();
-            if (eve.Photo != null)
+            if (blog == null) return NotFound();
+            if (blog.Photo != null)
             {
-                if (!eve.Photo.IsImage())
+                if (!blog.Photo.IsImage())
                 {
-                    ModelState.AddModelError("Photos", $"{eve.Photo.FileName} - shekil tipi deyil");
+                    ModelState.AddModelError("Photos", $"{blog.Photo.FileName} - shekil tipi deyil");
                     return View(oldBlog);
                 }
 
                 string folder = Path.Combine("assets", "img", "Blog");
-                string fileName = await eve.Photo.SaveImgAsync(_env.WebRootPath, folder);
+                string fileName = await blog.Photo.SaveImgAsync(_env.WebRootPath, folder);
                 if (fileName == null)
                 {
                     return NotFound();
@@ -201,15 +172,10 @@ namespace EduHomeASPNET.Areas.Administrator.Controllers
                 Helper.DeleteImage(_env.WebRootPath, folder, oldBlog.Image);
                 oldBlog.Image = fileName;
             }
-            oldBlog.Name = eve.Name;
-            oldBlog.OrganizedDay = eve.OrganizedDay;
-            oldBlog.PlacedArea = eve.PlacedArea;
-            oldBlog.StartTime = eve.StartTime;
-            oldBlog.EndTime = eve.EndTime;
-            oldBlog.BlogDetail.DetailedPlacedArea = eve.BlogDetail.DetailedPlacedArea;
-            oldBlog.BlogDetail.FirstContent = eve.BlogDetail.FirstContent;
-            oldBlog.BlogDetail.SecondContent = eve.BlogDetail.SecondContent;
-            oldBlog.BlogDetail.ThirdContent = eve.BlogDetail.ThirdContent;
+            
+            oldBlog.BlogDetail.FirstContent = blog.BlogDetail.FirstContent;
+            oldBlog.BlogDetail.SecondContent = blog.BlogDetail.SecondContent;
+            oldBlog.BlogDetail.ThirdContent = blog.BlogDetail.ThirdContent;
 
 
             await _context.SaveChangesAsync();

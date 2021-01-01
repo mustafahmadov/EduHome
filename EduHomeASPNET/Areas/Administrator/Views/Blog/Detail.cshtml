@@ -1,0 +1,17 @@
+﻿@model Blog
+@{ ViewData["Title"] = "Detail"; }
+
+<div class="row">
+    <img src="~/assets/img/blog/@Model.Image" width="300px" height="150px" />
+</div>
+<div class="row mt-5">Name: @Model.Author.FullName</div>
+<div class="row mt-5">Description: @Model.Description</div>
+<div class="row mt-5">Language: @Model.BlogDetail.FirstContent</div>
+<div class="row mt-5">SkillLevel: @Model.BlogDetail.SecondContent</div>
+<div class="row mt-5">StudentsCount: @Model.BlogDetail.ThirdContent</div>
+<div class="row mt-5">Duration: @Model.BlogDetail.FourthContent</div>
+<div class="row mt-5">About: @Model.PostedTime</div>
+<div class="row mt-5">ApplyInfo: @Model.CommentsCount</div>
+<div class="row mt-5">
+    <a asp-action="Index" class="btn btn-dark">Go back</a>
+</div>
