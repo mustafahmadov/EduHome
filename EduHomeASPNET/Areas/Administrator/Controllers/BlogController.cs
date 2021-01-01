@@ -130,17 +130,20 @@ namespace EduHomeASPNET.Areas.Administrator.Controllers
         // GET: BlogController/Edit/5
         public IActionResult Update(int? id)
         {
+            ViewBag.Authors = _context.Authors.ToList();
             Blog blog = _context.Blogs.Where(cr => cr.HasDeleted == false)
                 .Include(cr => cr.BlogDetail).FirstOrDefault(cr => cr.Id == id);
             return View(blog);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Update(int? id, Blog blog)
+        public async Task<IActionResult> Update(int? id, Blog blog,int? AuthorId)
         {
+            ViewBag.Authors = _context.Authors.ToList();
             if (id == null) return NotFound();
 
-            Blog oldBlog = await _context.Blogs.Include(c => c.BlogDetail).FirstOrDefaultAsync(c => c.Id == id);
+            Blog oldBlog = await _context.Blogs.Include(c => c.BlogDetail)
+                 .Include(b=>b.Author).FirstOrDefaultAsync(c => c.Id == id);
 
             Blog isExist = await _context.Blogs.Where(cr => cr.HasDeleted == false).FirstOrDefaultAsync(cr => cr.Id == id);
 
@@ -162,7 +165,7 @@ namespace EduHomeASPNET.Areas.Administrator.Controllers
                     return View(oldBlog);
                 }
 
-                string folder = Path.Combine("assets", "img", "Blog");
+                string folder = Path.Combine("assets", "img", "blog");
                 string fileName = await blog.Photo.SaveImgAsync(_env.WebRootPath, folder);
                 if (fileName == null)
                 {
@@ -172,10 +175,12 @@ namespace EduHomeASPNET.Areas.Administrator.Controllers
                 Helper.DeleteImage(_env.WebRootPath, folder, oldBlog.Image);
                 oldBlog.Image = fileName;
             }
-            
+            oldBlog.AuthorId = (int)AuthorId;
+            oldBlog.Description = blog.Description;
             oldBlog.BlogDetail.FirstContent = blog.BlogDetail.FirstContent;
             oldBlog.BlogDetail.SecondContent = blog.BlogDetail.SecondContent;
             oldBlog.BlogDetail.ThirdContent = blog.BlogDetail.ThirdContent;
+            oldBlog.BlogDetail.FourthContent = blog.BlogDetail.FourthContent;
 
 
             await _context.SaveChangesAsync();

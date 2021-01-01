@@ -1,4 +1,4 @@
-﻿@model Course
+﻿@model Blog
 @{
     ViewData["Title"] = "Delete";
 }
@@ -7,9 +7,8 @@
     <div class="row">
         <div class="col-md-8">
             <div class="card" style="width: 18rem;">
-                <img class="card-img-top" src="~/assets/img/course/@Model.Image" alt="Card image cap">
+                <img class="card-img-top" src="~/assets/img/blog/@Model.Image" alt="Card image cap">
                 <div class="card-body">
-                    <h5 class="card-title">@Model.Name</h5>
                     @Html.Raw(Model.Description)
                     <form method="post">
                         <button type="submit" class="btn btn-danger">Delete</button>
