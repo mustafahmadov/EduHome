@@ -1,7 +1,19 @@
 (function ($) {
 "use strict";  
 
-    
+ $(document).on('keyup', '#search', function () {
+        let search = $(this).val().trim();
+        $("#searchList li").slice(1).remove();
+        if (search.length > 0) {
+            $.ajax({
+                url: "/Teacher/Search?search=" + search,
+                type: "Get",
+                success: function (res) {
+                    $("#searchList").append(res);
+                }
+            })
+        }
+    })
 /*------------------------------------
 	Sticky Menu 
 --------------------------------------*/

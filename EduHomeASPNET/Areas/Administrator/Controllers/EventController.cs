@@ -153,15 +153,6 @@ namespace EduHomeASPNET.Areas.Administrator.Controllers
             await _context.Events.AddAsync(newEvent);
             await _context.SaveChangesAsync();
 
-            List<SubscribedEmail> emails = _context.SubscribedEmails.Where(e => e.HasDeleted == false).ToList();
-            foreach (SubscribedEmail email in emails)
-            {
-                await SendEmailAsync(email.Email, "Yeni bir event yaradildi.", "<h1>Yeni bir event yaradildi</h1>");
-            }
-
-            
-
-
             newEventDetail.HasDeleted = false;
             newEventDetail.DetailedPlacedArea = eve.EventDetail.DetailedPlacedArea;
             newEventDetail.FirstContent = eve.EventDetail.FirstContent;
@@ -172,8 +163,13 @@ namespace EduHomeASPNET.Areas.Administrator.Controllers
 
 
             await _context.EventDetails.AddAsync(newEventDetail);
-            newEvent.EventDetailId = newEventDetail.Id;
             await _context.SaveChangesAsync();
+
+            List<SubscribedEmail> emails = _context.SubscribedEmails.Where(e => e.HasDeleted == false).ToList();
+            foreach (SubscribedEmail email in emails)
+            {
+                await SendEmailAsync(email.Email, "Yeni bir event yaradildi.", "<h1>Yeni bir event yaradildi</h1>");
+            }
 
             return RedirectToAction(nameof(Index));
         }

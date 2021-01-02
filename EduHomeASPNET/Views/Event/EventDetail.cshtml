@@ -20,9 +20,9 @@
                             <li><span>time:</span> @Model.Event.StartTime.ToString("HH:mm") - @Model.Event.EndTime.ToString("HH:mm")</li>
                             <li><span>venue</span> @Model.Event.EventDetail.DetailedPlacedArea</li>
                         </ul>
-                        <p>@Model.EventDetail.FirstContent</p>
-                        <p>@Model.EventDetail.SecondContent</p>
-                        <p>@Model.EventDetail.ThirdContent</p>
+                        <p>@Model.Event.EventDetail.FirstContent</p>
+                        <p>@Model.Event.EventDetail.SecondContent</p>
+                        <p>@Model.Event.EventDetail.ThirdContent</p>
                         <div class="speakers-area fix">
                             <h4>speaker</h4>
                             @foreach (Speaker speaker in Model.Speakers)

@@ -138,11 +138,14 @@ else
                                 </ul>
                                 <div class="search">
                                     <div class="search-form">
-                                        <form id="search-form" action="#">
-                                            <input type="search" placeholder="Search here..." name="search" />
-                                            <button type="submit">
-                                                <span><i class="fa fa-search"></i></span>
-                                            </button>
+                                        <form id="search-form-@(TempData["controllerName"].ToString().ToLower())">
+                                            <ul class="list-unstyled py-3" id="searchList">
+                                                <li class="d-flex px-3">
+                                                    <input id="search" type="text" placeholder="Search">
+                                                </li>
+
+                                            </ul>
+                                           
                                         </form>
                                     </div>
                                 </div>

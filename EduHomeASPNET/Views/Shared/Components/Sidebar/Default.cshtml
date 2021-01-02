@@ -32,7 +32,7 @@
         {
             <div class="single-post mb-30">
                 <div class="single-post-img">
-                    <a href="blog-details.html">
+                    <a asp-controller="Blog" asp-action="BlogDetail" asp-route-id="@blog.Id">
                         <img src="~/assets/img/blog/@blog.Image" alt="post" style="width:100px;height:80px">
                         <div class="blog-hover">
                             <i class="fa fa-link"></i>
@@ -40,7 +40,7 @@
                     </a>
                 </div>
                 <div class="single-post-content">
-                    <h4><a href="blog-details.html">@blog.Description</a></h4>
+                    <h4><a asp-controller="Blog" asp-action="BlogDetail" asp-route-id="@blog.Id">@blog.Description</a></h4>
                     <p>@blog.Author.FullName  /  June 20, 2017</p>
                 </div>
             </div>

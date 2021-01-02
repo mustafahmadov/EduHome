@@ -6,24 +6,6 @@
 <!-- Course Start -->
 <div class="course-area pt-150 pb-150">
     <div class="container">
-        <div class="row">
-            <div class="col-xs-12">
-                <div class="course-title">
-                    <h3>search courses</h3>
-                </div>
-                <div class="course-form">
-                    <form id="search" action="#">
-                        <ul id="searchList">
-                            <li class="d-flex px-3">
-                                <input type="text" placeholder="Search..." name="search" id="input-search-course" />
-                            </li>
-                        </ul>
-
-                        <button type="submit">search</button>
-                    </form>
-                </div>
-            </div>
-        </div>
         <div class="row" id="courseArea">
             @foreach (Course course in Model)
             {
@@ -31,7 +13,7 @@
                     <div class="single-course mb-70">
                         <div class="course-img">
                             <a asp-controller="Course" asp-action="CourseDetail" asp-route-id="@course.Id">
-                                <img src="~/assets/img/course/@course.Image" alt="course">
+                                <img src="~/assets/img/course/@course.Image" alt="course" style="height:300px">
                                 <div class="course-hover">
                                     <i class="fa fa-link"></i>
                                 </div>
@@ -48,29 +30,34 @@
 
 
         </div>
-        <nav aria-label="..." class="justify-content-center">
-            <ul class="pagination pagination-sm">
-                @for (int i = 1; i <= ViewBag.PageCount; i++)
-                {
-                    if (i == ViewBag.Page)
-                    {
-                        <li class="page-item disabled">
-                            <a class="page-link" href="#">@i</a>
-                        </li>
-                    }
-                    else
-                    {
-                        <li class="page-item">
-                            <a class="page-link" asp-controller="Course" asp-action="Index" asp-route-page="@i">@i</a>
-                        </li>
-                    }
-                }
-            </ul>
-        </nav>
+        <div class="row">
+            <div class="col-xs-12 text-center">
+                <div class="pagination d-flex justify-content-center align-item-center text-center">
+                    <ul>
+                        @for (int i = 1; i <= ViewBag.PageCount; i++)
+                        {
+                            if (i == ViewBag.Page)
+                            {
+                                <li class="disabled page-item">
+                                    <a class="page-link" href="#">@i</a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="page-item">
+                                    <a class="page-link" asp-controller="Course" asp-action="Index" asp-route-page="@i">@i</a>
+                                </li>
+                            }
+                        }
+
+                    </ul>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 <!-- Course End -->
-@section Scripts{
+@*@section Scripts{
 <script>
     $(document).on('keyup', '#input-search-course', function () {
         let search = $(this).val().trim();
@@ -89,4 +76,4 @@
     })
 </script>
    
-}
+}*@

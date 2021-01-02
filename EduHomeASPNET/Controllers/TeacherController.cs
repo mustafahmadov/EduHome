@@ -38,15 +38,7 @@ namespace EduHomeASPNET.Controllers
         }
         public IActionResult Search(string search)
         {
-            if (search == null)
-            {
-                return View(_context.Teachers.Where(t => t.HasDeleted == false).Take(8).ToList());
-            }
             IEnumerable<Teacher> model = _context.Teachers.Where(t => t.Name.Contains(search)).Take(8);
-            if (model == null)
-            {
-                return Content("skjdlkjf");
-            }
             return PartialView("_SearchTeacherPartial", model);
         }
     }

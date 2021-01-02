@@ -2,47 +2,38 @@
 @{
     ViewData["Title"] = "OUR TEACHERS";
 }
-
-
-
 <div class="teacher-area pt-150 pb-105">
     <div class="container">
         <div class="course-title">
             <h3>search teachers</h3>
         </div>
-        <div class="course-form">
-            <form id="searchTeacher" action="#">
-                <ul id="searchList">
-                    <li class="d-flex px-3">
-                        <input type="text" placeholder="Search..." name="search" id="input-search" />
-                    </li>
-                </ul>
-
-                <button type="submit">search</button>
-            </form>
-        </div>
         <div class="row" id="teacherArea">
             @await Component.InvokeAsync("Teacher", new { page = ViewBag.Page, take = 8 })
         </div>
-        <nav aria-label="..." class="justify-content-center">
-            <ul class="pagination pagination-sm">
-                @for (int i = 1; i <= ViewBag.PageCount; i++)
-                {
-                    if (i == ViewBag.Page)
-                    {
-                        <li class="page-item disabled">
-                            <a class="page-link" href="#">@i</a>
-                        </li>
-                    }
-                    else
-                    {
-                        <li class="page-item">
-                            <a class="page-link" asp-controller="Teacher" asp-action="Index" asp-route-page="@i">@i</a>
-                        </li>
-                    }
-                }
-            </ul>
-        </nav>
+        <div class="row">
+            <div class="col-xs-12 text-center">
+                <div class="pagination d-flex justify-content-center align-item-center text-center">
+                    <ul>
+                        @for (int i = 1; i <= ViewBag.PageCount; i++)
+                        {
+                            if (i == ViewBag.Page)
+                            {
+                                <li class="disabled page-item">
+                                    <a class="page-link" href="#">@i</a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="page-item">
+                                    <a class="page-link" asp-controller="Teacher" asp-action="Index" asp-route-page="@i">@i</a>
+                                </li>
+                            }
+                        }
+
+                    </ul>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 @section Scripts{
