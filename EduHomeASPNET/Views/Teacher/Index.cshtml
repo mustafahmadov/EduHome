@@ -36,25 +36,5 @@
         </div>
     </div>
 </div>
-@section Scripts{
-    <script>
-    $(document).on('submit', '#searchTeacher', function () {
-        let search = $("#input-search").val().trim();
-        //$("#searchList li").slice(1).remove();
-        $("#teacherArea").html("");
-        if (search.length > 0) {
-            $.ajax({
-                url: "/Teacher/Search?search=" + search,
-                type: "Get",
-                success: function (res) {
-                    //$("#teacherArea").InnerHTML = "";
-                    $("#teacherArea").append(res);
-                }
-            })
-        }
-    })
-    </script>
-
-}
 
 

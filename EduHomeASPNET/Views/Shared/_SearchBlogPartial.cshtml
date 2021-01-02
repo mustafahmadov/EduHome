@@ -1,0 +1,7 @@
+﻿@model IEnumerable<Blog>
+@foreach (Blog item in Model)
+{
+<li style="display: flex; background: white; padding: 5px;">
+    <a asp-action="BlogDetail" asp-route-id="@item.Id">@item.Description.ToString().Substring(0,15)</a>
+</li>
+}

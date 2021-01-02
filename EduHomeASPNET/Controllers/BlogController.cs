@@ -41,5 +41,10 @@ namespace EduHomeASPNET.Controllers
             return View(blog);
 
         }
+        public IActionResult Search(string search)
+        {
+            IEnumerable<Blog> model = _context.Blogs.Where(t => t.Description.Contains(search)).Take(8);
+            return PartialView("_SearchBlogPartial", model);
+        }
     }
 }

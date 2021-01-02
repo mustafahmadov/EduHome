@@ -129,27 +129,28 @@ else
                                 </nav>
 
                             </div>
-                            <!--Search Form Start-->
-                            <div class="search-btn">
-                                <ul data-toggle="dropdown" class="header-search search-toggle">
-                                    <li class="search-menu">
-                                        <i class="fa fa-search"></i>
-                                    </li>
-                                </ul>
-                                <div class="search">
-                                    <div class="search-form">
-                                        <form id="search-form-@(TempData["controllerName"].ToString().ToLower())">
-                                            <ul class="list-unstyled py-3" id="searchList">
-                                                <li class="d-flex px-3">
-                                                    <input id="search" type="text" placeholder="Search">
-                                                </li>
+                                <div class="search-btn @TempData["controllerName"]">
+                                    <ul data-toggle="dropdown" class="header-search search-toggle">
+                                        <li class="search-menu">
+                                            <i class="fa fa-search"></i>
+                                        </li>
+                                    </ul>
+                                    <div class="search">
+                                        <div class="search-form">
+                                            <form id="search-form" class="search-form-@TempData["controllerName"]">
+                                                <input  placeholder="Search here..." name="search" id="search" />
+                                                <button type="submit">
+                                                    <span><i class="fa fa-search"></i></span>
+                                                </button>
 
+                                            </form>
+                                            <ul id="searchList">
+                                                
                                             </ul>
-                                           
-                                        </form>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            
                             <!--End of Search Form-->
                             <!-- Main Menu End -->
                         </div>

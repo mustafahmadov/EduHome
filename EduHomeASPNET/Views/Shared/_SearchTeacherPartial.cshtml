@@ -1,8 +1,7 @@
 ﻿@model IEnumerable<Teacher>
 @foreach (Teacher item in Model)
 {
-<li>
-    <a asp-action="TeacherDetail" asp-route-id="@item.Id">@item.Name</a>
+<li style="display: flex; background: white; padding: 5px;">
+    <a asp-action="TeacherDetail" asp-route-id="@item.Id" >@item.Name</a>
 </li>
-
 }

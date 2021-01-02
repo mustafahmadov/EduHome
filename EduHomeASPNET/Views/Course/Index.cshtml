@@ -36,23 +36,3 @@
     </div>
 </div>
 <!-- Course End -->
-@*@section Scripts{
-<script>
-    $(document).on('keyup', '#input-search-course', function () {
-        let search = $(this).val().trim();
-        //$("#searchList li").slice(1).remove();
-        $("#courseArea").html("")
-        if (search.length > 0) {
-            $.ajax({
-                url: "/Course/Search?search=" + search,
-                type: "Get",
-                success: function (res) {
-                    //$("#courseArea").html("")
-                    $("#courseArea").append(res);
-                }
-            })
-        }
-    })
-</script>
-   
-}*@

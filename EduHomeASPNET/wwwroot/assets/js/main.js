@@ -1,19 +1,41 @@
+
+
 (function ($) {
 "use strict";  
+    const SearchAjax = (searchAreaClassName) => {
+        let controllerName = searchAreaClassName.substring(13, searchAreaClassName.length);
+        let searchInput = $(`${searchAreaClassName} #search`);
+        $(document).on('keyup', searchInput, function () {
+            let search = $(searchInput).val().trim();
+            let responseArea = $(searchAreaClassName).next();
+            responseArea.children('li').slice(1).remove();
+            if (search.length > 0) {
+                $.ajax({
 
- $(document).on('keyup', '#search', function () {
-        let search = $(this).val().trim();
-        $("#searchList li").slice(1).remove();
-        if (search.length > 0) {
-            $.ajax({
-                url: "/Teacher/Search?search=" + search,
-                type: "Get",
-                success: function (res) {
-                    $("#searchList").append(res);
-                }
-            })
-        }
-    })
+                    url: `${controllerName}/Search?search=` + search,
+                    type: "Get",
+                    success: function (res) {
+                        $(responseArea).append(res);
+                    }
+                })
+            }
+        })
+    }
+    let searchBtn = $('.search-btn');
+    if (searchBtn.hasClass('Teacher')) {
+        SearchAjax('.search-form-Teacher');
+    }
+    else if (searchBtn.hasClass('Blog')) {
+        SearchAjax('.search-form-Blog');
+    }
+    else if (searchBtn.hasClass('Event')) {
+        SearchAjax('.search-form-Event');
+    }
+    else if (searchBtn.hasClass('Course')) {
+        SearchAjax('.search-form-Course');
+    }
+    
+ 
 /*------------------------------------
 	Sticky Menu 
 --------------------------------------*/
