@@ -355,3 +355,4 @@ C:\Users\musta\Desktop\EduHome\EduHomeASPNET\bin\Debug\netcoreapp3.1\Castle.Core
 C:\Users\musta\Desktop\EduHome\EduHomeASPNET\bin\Debug\netcoreapp3.1\NETCore.MailKit.dll
 C:\Users\musta\Desktop\EduHome\EduHomeASPNET\obj\Debug\netcoreapp3.1\EduHomeASPNET.csproj.CoreCompileInputs.cache
 C:\Users\musta\Desktop\EduHome\EduHomeASPNET\obj\Debug\netcoreapp3.1\EduHomeASPNET.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\musta\Desktop\EduHome\EduHomeASPNET\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Components\Course\Default.cshtml.g.cs
