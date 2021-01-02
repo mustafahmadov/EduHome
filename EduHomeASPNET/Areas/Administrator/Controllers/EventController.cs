@@ -26,16 +26,13 @@ namespace EduHomeASPNET.Areas.Administrator.Controllers
     {
         private readonly AppDbContext _context;
         private readonly IWebHostEnvironment _env;
-        private readonly IHostingEnvironment _hosting;
         private readonly IConfiguration _config;
         public EventController(AppDbContext context,
                                IWebHostEnvironment env,
-                               IHostingEnvironment hosting,
                                IConfiguration config)
         {
             _context = context;
             _env = env;
-            _hosting = hosting;
             _config = config;
         }
         // GET: EventController
@@ -281,11 +278,11 @@ namespace EduHomeASPNET.Areas.Administrator.Controllers
                 UseDefaultCredentials = false,
                 Credentials = new NetworkCredential()
                 {
-                    UserName = "mustafaia@code.edu.az",
-                    Password = "araz2006"
+                    UserName = "mustafaahmadov8@gmail.com",
+                    Password = "Araz2006"
                 }
             };
-            MailAddress fromEmail = new MailAddress("mustafaia@code.edu.az", "Mustafa");
+            MailAddress fromEmail = new MailAddress("mustafaahmadov8@gmail.com", "Mustafa");
             MailAddress toEmail = new MailAddress(email, "Mustafa");
             MailMessage message = new MailMessage()
             {

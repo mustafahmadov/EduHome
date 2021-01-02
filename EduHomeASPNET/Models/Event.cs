@@ -18,9 +18,9 @@ namespace EduHomeASPNET.Models
         public IFormFile Photo { get; set; }
         [Required]
         public string Name { get; set; }
-        public DateTime? OrganizedDay { get; set; }
-        public DateTime? StartTime { get; set; }
-        public DateTime? EndTime { get; set; }
+        public DateTime OrganizedDay { get; set; }
+        public DateTime StartTime { get; set; }
+        public DateTime EndTime { get; set; }
         [Required]
         public string PlacedArea { get; set; }
         public bool HasDeleted { get; set; }
