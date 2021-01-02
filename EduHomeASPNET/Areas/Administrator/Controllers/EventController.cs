@@ -2,15 +2,22 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Threading.Tasks;
 using EduHomeASPNET.DAL;
 using EduHomeASPNET.Models;
 using FrontToUp.Extentions;
 using FrontToUp.Helpers;
+using MailKit.Net.Smtp;
+using MailKit.Security;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using MimeKit;
+using MimeKit.Text;
 
 namespace EduHomeASPNET.Areas.Administrator.Controllers
 {
@@ -19,11 +26,17 @@ namespace EduHomeASPNET.Areas.Administrator.Controllers
     {
         private readonly AppDbContext _context;
         private readonly IWebHostEnvironment _env;
+        private readonly IHostingEnvironment _hosting;
+        private readonly IConfiguration _config;
         public EventController(AppDbContext context,
-                               IWebHostEnvironment env)
+                               IWebHostEnvironment env,
+                               IHostingEnvironment hosting,
+                               IConfiguration config)
         {
             _context = context;
             _env = env;
+            _hosting = hosting;
+            _config = config;
         }
         // GET: EventController
         public ActionResult Index()
@@ -143,6 +156,15 @@ namespace EduHomeASPNET.Areas.Administrator.Controllers
             await _context.Events.AddAsync(newEvent);
             await _context.SaveChangesAsync();
 
+            List<SubscribedEmail> emails = _context.SubscribedEmails.Where(e => e.HasDeleted == false).ToList();
+            foreach (SubscribedEmail email in emails)
+            {
+                await SendEmailAsync(email.Email, "Yeni bir event yaradildi.", "<h1>Yeni bir event yaradildi</h1>");
+            }
+
+            
+
+
             newEventDetail.HasDeleted = false;
             newEventDetail.DetailedPlacedArea = eve.EventDetail.DetailedPlacedArea;
             newEventDetail.FirstContent = eve.EventDetail.FirstContent;
@@ -247,6 +269,32 @@ namespace EduHomeASPNET.Areas.Administrator.Controllers
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
+        }
+        public async Task SendEmailAsync(string email, string subject, string htmlMessage)
+        {
+            System.Net.Mail.SmtpClient client = new System.Net.Mail.SmtpClient()
+            {
+                Host = "smtp.gmail.com",
+                Port = 587,
+                EnableSsl = true,
+                DeliveryMethod = SmtpDeliveryMethod.Network,
+                UseDefaultCredentials = false,
+                Credentials = new NetworkCredential()
+                {
+                    UserName = "mustafaia@code.edu.az",
+                    Password = "araz2006"
+                }
+            };
+            MailAddress fromEmail = new MailAddress("mustafaia@code.edu.az", "Mustafa");
+            MailAddress toEmail = new MailAddress(email, "Mustafa");
+            MailMessage message = new MailMessage()
+            {
+                From = fromEmail,
+                Subject = subject,
+                Body = htmlMessage
+            };
+            message.To.Add(toEmail);
+            client.Send(message);
         }
     }
 }

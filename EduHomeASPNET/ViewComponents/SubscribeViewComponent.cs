@@ -1,4 +1,5 @@
 ﻿using EduHomeASPNET.DAL;
+using EduHomeASPNET.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -16,7 +17,11 @@ namespace EduHomeASPNET.ViewComponents
         }
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            return View(await Task.FromResult(_context.Subscribes.FirstOrDefault()));
+            SubscribeVM subscribe = new SubscribeVM()
+            {
+                Subscribe = _context.Subscribes.FirstOrDefault(),
+            };
+            return View(await Task.FromResult(subscribe));
         }
     }
 }

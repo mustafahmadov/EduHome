@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using EduHomeASPNET.DAL;
 using EduHomeASPNET.Models;
 using EduHomeASPNET.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace EduHomeASPNET.Controllers
 {
@@ -14,13 +16,17 @@ namespace EduHomeASPNET.Controllers
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
         private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly AppDbContext _context;
+
         public AccountController(UserManager<AppUser> userManager,
                                 SignInManager<AppUser> signInManager,
-                                RoleManager<IdentityRole> roleManager)
+                                RoleManager<IdentityRole> roleManager,
+                                AppDbContext context)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _roleManager = roleManager;
+            _context = context;
         }
         public IActionResult Login()
         {
@@ -95,6 +101,34 @@ namespace EduHomeASPNET.Controllers
         {
             await _signInManager.SignOutAsync();
             return RedirectToAction("Index", "Home");
+        }
+
+        public IActionResult Subscribe()
+        {
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Subscribe(SubscribedEmail subscribedEmail)
+        {
+            if (ModelState.IsValid)
+            {
+                SubscribedEmail subscribed = new SubscribedEmail();
+                subscribed.Email = subscribedEmail.Email.Trim().ToLower();
+                bool isExist = _context.SubscribedEmails
+                      .Any(e => e.Email.Trim().ToLower() == subscribedEmail.Email.Trim().ToLower());
+                if (isExist)
+                {
+                    ModelState.AddModelError("", "This email already subscribed");
+                }
+                else
+                {
+                    await _context.SubscribedEmails.AddAsync(subscribed);
+                    await _context.SaveChangesAsync();
+                }
+                
+            }
+            return RedirectToAction("Index","Home");
         }
 
         //public async Task CreateRole()

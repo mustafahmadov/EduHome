@@ -955,6 +955,27 @@ namespace EduHomeASPNET.Migrations
                     b.ToTable("Subscribes");
                 });
 
+            modelBuilder.Entity("EduHomeASPNET.Models.SubscribedEmail", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime?>("DeletedTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("HasDeleted")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("SubscribedEmails");
+                });
+
             modelBuilder.Entity("EduHomeASPNET.Models.Tag", b =>
                 {
                     b.Property<int>("Id")

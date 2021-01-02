@@ -45,13 +45,17 @@ namespace EduHomeASPNET
             {
                 options.UseSqlServer(Configuration["ConnectionString:Default"]);
             });
-            services.AddMvc(options =>
-            {
-                var policy = new AuthorizationPolicyBuilder()
-                                .RequireAuthenticatedUser()
-                                .Build();
-                options.Filters.Add(new AuthorizeFilter(policy));
-            });
+            //services.AddMvc(options =>
+            //{
+            //    var policy = new AuthorizationPolicyBuilder()
+            //                    .RequireAuthenticatedUser()
+            //                    .Build();
+            //    options.Filters.Add(new AuthorizeFilter(policy));
+            ////});
+            //var emailConfig = Configuration
+            //   .GetSection("EmailConfiguration")
+            //     .Get<EmailConfiguration>();
+            //services.AddSingleton(emailConfig);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
