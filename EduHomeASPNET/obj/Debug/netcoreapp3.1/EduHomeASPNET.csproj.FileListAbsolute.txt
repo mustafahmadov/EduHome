@@ -343,3 +343,11 @@ C:\Users\musta\Desktop\EduHome\EduHomeASPNET\bin\Debug\netcoreapp3.1\Microsoft.E
 C:\Users\musta\Desktop\EduHome\EduHomeASPNET\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Identity.Stores.dll
 C:\Users\musta\Desktop\EduHome\EduHomeASPNET\obj\Debug\netcoreapp3.1\EduHomeASPNET.csproj.CoreCompileInputs.cache
 C:\Users\musta\Desktop\EduHome\EduHomeASPNET\obj\Debug\netcoreapp3.1\EduHomeASPNET.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\musta\Desktop\EduHome\EduHomeASPNET\obj\Debug\netcoreapp3.1\Razor\Views\Account\Register.cshtml.g.cs
+C:\Users\musta\Desktop\EduHome\EduHomeASPNET\obj\Debug\netcoreapp3.1\Razor\Views\Account\Login.cshtml.g.cs
+C:\Users\musta\Desktop\EduHome\EduHomeASPNET\obj\Debug\netcoreapp3.1\Razor\Areas\Administrator\Views\User\ChangeRole.cshtml.g.cs
+C:\Users\musta\Desktop\EduHome\EduHomeASPNET\obj\Debug\netcoreapp3.1\Razor\Areas\Administrator\Views\User\ChangeStatus.cshtml.g.cs
+C:\Users\musta\Desktop\EduHome\EduHomeASPNET\obj\Debug\netcoreapp3.1\Razor\Areas\Administrator\Views\User\Index.cshtml.g.cs
+C:\Users\musta\Desktop\EduHome\EduHomeASPNET\obj\Debug\netcoreapp3.1\Razor\Areas\Administrator\Views\User\ResetPassword.cshtml.g.cs
+C:\Users\musta\Desktop\EduHome\EduHomeASPNET\obj\Debug\netcoreapp3.1\Razor\Areas\Administrator\Views\Administrator\CreateRole.cshtml.g.cs
+C:\Users\musta\Desktop\EduHome\EduHomeASPNET\bin\Debug\netcoreapp3.1\web.config
