@@ -14,7 +14,8 @@ namespace EduHomeASPNET.Areas.Administrator.Controllers
     [Area("Administrator")]
     //[Authorize(Roles = "Admin")]
     //[Authorize(Roles = "User")]
-    [Authorize(Policy = "RequireAdministratorRole")]
+    //[Authorize(Policy = "RequireAdministratorRole")]
+
     public class AdministratorController : Controller
     {
         private readonly RoleManager<IdentityRole> _roleManager;

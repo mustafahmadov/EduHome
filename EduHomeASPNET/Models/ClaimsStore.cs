@@ -13,6 +13,7 @@ namespace EduHomeASPNET.Models
         new Claim("Update Course","Update Course"),
         new Claim("Detail Course","Detail Course"),
         new Claim("Create Course", "Create Course"),
+        new Claim("Delete Course", "Delete Course"),
         };
     }
 }

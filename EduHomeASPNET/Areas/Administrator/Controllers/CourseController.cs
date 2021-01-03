@@ -16,7 +16,7 @@ namespace EduHomeASPNET.Areas.Administrator.Controllers
 {
     [Area("Administrator")]
     //[Authorize(Roles ="Admin")]
-    [Authorize(Policy = "RequireAdministratorRole")]
+    [Authorize(Roles = "Admin,CourseModerator")]
     public class CourseController : Controller
     {
         private readonly AppDbContext _context;
@@ -27,13 +27,14 @@ namespace EduHomeASPNET.Areas.Administrator.Controllers
             _context = context;
             _env = env;
         }
+        //[Authorize(Roles ="CourseModerator")]
         public IActionResult Index()
         {
             List<Course> courses = _context.Courses.Where(c => c.HasDeleted == false)
                 .Include(c => c.CourseDetail).ToList();
             return View(courses);
         }
-        [Authorize(Policy = "CreateCoursePolicy")]
+        [Authorize(Policy = "DetailCoursePolicy")]
         public async Task<IActionResult> Detail(int? id)
         {
             if (id == null) return NotFound();
@@ -228,6 +229,7 @@ namespace EduHomeASPNET.Areas.Administrator.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+        [Authorize(Policy ="DeleteCoursePolicy")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null) return NotFound();
@@ -239,6 +241,7 @@ namespace EduHomeASPNET.Areas.Administrator.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ActionName("Delete")]
+        [Authorize(Policy = "DeleteCoursePolicy")]
         public async Task<IActionResult> DeleteEvent(int? id)
         {
             if (id == null) return NotFound();

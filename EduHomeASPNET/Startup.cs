@@ -62,6 +62,8 @@ namespace EduHomeASPNET
                      policy => policy.RequireClaim("Update Course"));
                 options.AddPolicy("DetailCoursePolicy",
                      policy => policy.RequireClaim("Detail Course"));
+                options.AddPolicy("DeleteCoursePolicy",
+                     policy => policy.RequireClaim("Delete Course"));
             });
         }
 

@@ -1,6 +1,7 @@
 ﻿@model Bio
 
 @inject SignInManager<AppUser> signInManager;
+@inject UserManager<AppUser> userManager;
 @if (TempData["controllerName"].ToString() == "Home")
 {<!-- Header Area Start -->
                 <header class="top">
@@ -87,19 +88,24 @@
                                                                         <ul>
                                                                             @if (User.Identity.IsAuthenticated)
                                                                             {
-                                                                                   <li>@User.Identity.Name</li> 
-                                                                            }
-                                                                            else
-                                                                            {
-                                                                                   <li><a asp-controller="Account" asp-action="Register">register</a></li>
-                                                                            }
+                                                                                <li><a>@User.Identity.Name</a></li> }
+                                                                                                else
+                                                                                                {
+                                                                                <li><a asp-controller="Account" asp-action="Register">register</a></li>}
                                                                             @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
                                                                             {
-                                                                                   <li class="nav-item">
-                                                                                       <a class="nav-link" asp-controller="Administrator" asp-action="ListRoles">
-                                                                                            Manage Roles
-                                                                                       </a>
-                                                                                   </li>
+                                                                        <li class="nav-item">
+                                                                            <a class="nav-link" asp-controller="Administrator" asp-action="Dashboard">
+                                                                                Go to Admin
+                                                                            </a>
+                                                                        </li>}
+                                                                            @if (User.Identity.IsAuthenticated && User.IsInRole("CourseModerator"))
+                                                                            {
+                                                                              <li class="nav-item">
+                                                                                  <a class="nav-link" asp-controller="Administrator" asp-action="Course">
+                                                                                      Edit Course
+                                                                                  </a>
+                                                                              </li>
                                                                             }
                                                                         </ul>
                                                                     </div>

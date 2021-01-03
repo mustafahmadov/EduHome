@@ -9,6 +9,7 @@ using EduHomeASPNET.Models;
 using EduHomeASPNET.ViewModels;
 using Microsoft.EntityFrameworkCore;
 using EduHomeASPNET.DAL;
+using Microsoft.AspNetCore.Identity;
 
 namespace EduHomeASPNET.Controllers
 {
@@ -22,6 +23,7 @@ namespace EduHomeASPNET.Controllers
         {
             _logger = logger;
             _context = context;
+   
         }
 
         public IActionResult Index()

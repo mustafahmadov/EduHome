@@ -141,9 +141,9 @@ namespace EduHomeASPNET.Controllers
         //    {
         //        await _roleManager.CreateAsync(new IdentityRole { Name = "Member" });
         //    }
-        //    if (!(await _roleManager.RoleExistsAsync("Moderator")))
+        //    if (!(await _roleManager.RoleExistsAsync("CourseModerator")))
         //    {
-        //        await _roleManager.CreateAsync(new IdentityRole { Name = "Moderator" });
+        //        await _roleManager.CreateAsync(new IdentityRole { Name = "CourseModerator" });
         //    }
         //}
     }
