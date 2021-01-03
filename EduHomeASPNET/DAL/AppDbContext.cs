@@ -42,6 +42,8 @@ namespace EduHomeASPNET.DAL
         public DbSet<CourseTag> CourseTags { get; set; }
         public DbSet<Tag> Tags { get; set; }
         public DbSet<SubscribedEmail> SubscribedEmails { get; set; }
+        public DbSet<ContactDetail> ContactDetails { get; set; }
+        public DbSet<Map> Map { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
