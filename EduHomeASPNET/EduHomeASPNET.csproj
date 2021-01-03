@@ -5,6 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20210103200324_ContactAdded.cs" />
+    <Compile Remove="Migrations\20210103200324_ContactAdded.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Include="Views\Home\Index.cshtml" />
     <None Include="Views\Home\Privacy.cshtml" />
     <None Include="Views\Shared\Error.cshtml" />

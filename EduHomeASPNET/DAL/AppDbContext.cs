@@ -43,7 +43,7 @@ namespace EduHomeASPNET.DAL
         public DbSet<Tag> Tags { get; set; }
         public DbSet<SubscribedEmail> SubscribedEmails { get; set; }
         public DbSet<ContactDetail> ContactDetails { get; set; }
-        public DbSet<Map> Map { get; set; }
+        public DbSet<Map> Maps { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -72,100 +72,7 @@ namespace EduHomeASPNET.DAL
                 .WithOne(t => t.Teacher)
                 .HasForeignKey<Skill>(s => s.TeacherId);
 
-            modelBuilder.Entity<Event>().HasData(
-                new Event
-                {
-                    Id = 1,
-                    Name = "ADVANCE PHP WORKSHOP",
-                    Image = "event5.jpg",
-                    HasDeleted = false,
-                    ExperiedDate = false,
-                    PlacedArea = "Baku",
-                    EventDetailId = 1
-                },
-                new Event
-                {
-                    Id = 2,
-                    Name = "ADVANCE PHP WORKSHOP",
-                    Image = "event6.jpg",
-                    HasDeleted = false,
-                    ExperiedDate = false,
-                    PlacedArea = "Baku",
-                    EventDetailId = 2
-                },
-                new Event
-                {
-                    Id = 3,
-                    Name = "ADVANCE PHP WORKSHOP",
-                    Image = "event7.jpg",
-                    HasDeleted = false,
-                    ExperiedDate = false,
-                    PlacedArea = "Baku",
-                    EventDetailId = 3
-                },
-                new Event
-                {
-                    Id = 4,
-                    Name = "ADVANCE PHP WORKSHOP",
-                    Image = "event8.jpg",
-                    HasDeleted = false,
-                    ExperiedDate = false,
-                    PlacedArea = "Baku",
-                    EventDetailId = 4
-                },
-                new Event
-                {
-                    Id = 5,
-                    Name = "ADVANCE PHP WORKSHOP",
-                    Image = "event9.jpg",
-                    HasDeleted = false,
-                    ExperiedDate = false,
-                    PlacedArea = "Baku",
-                    EventDetailId = 5
-                },
-                new Event
-                {
-                    Id = 6,
-                    Name = "ADVANCE PHP WORKSHOP",
-                    Image = "event10.jpg",
-                    HasDeleted = false,
-                    ExperiedDate = false,
-                    PlacedArea = "Baku",
-                    EventDetailId = 1
-                },
-                new Event
-                {
-                    Id = 7,
-                    Name = "ADVANCE PHP WORKSHOP",
-                    Image = "event11.jpg",
-                    HasDeleted = false,
-                    ExperiedDate = false,
-                    PlacedArea = "Baku",
-                    EventDetailId = 7
-                },
-                new Event
-                {
-                    Id = 8,
-                    Name = "ADVANCE PHP WORKSHOP",
-                    Image = "event12.jpg",
-                    HasDeleted = false,
-                    ExperiedDate = false,
-                    PlacedArea = "Baku",
-                    EventDetailId = 8
-                },
-                new Event
-                {
-                    Id = 9,
-                    Name = "ADVANCE PHP WORKSHOP",
-                    Image = "event13.jpg",
-                    HasDeleted = false,
-                    ExperiedDate = false,
-                    PlacedArea = "Baku",
-                    EventDetailId = 9
-                }
-                );
+            
         }
-
-
     }
 }
