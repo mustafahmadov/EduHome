@@ -40,7 +40,7 @@ namespace EduHomeASPNET
                 identityOptions.Lockout.AllowedForNewUsers = true;
                 identityOptions.Lockout.MaxFailedAccessAttempts = 3;
                 identityOptions.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(10);
-            }).AddDefaultTokenProviders().AddEntityFrameworkStores<AppDbContext>();
+            }).AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
             services.AddDbContext<AppDbContext>(options =>
             {
                 options.UseSqlServer(Configuration["ConnectionString:Default"]);
@@ -51,11 +51,18 @@ namespace EduHomeASPNET
             //                    .RequireAuthenticatedUser()
             //                    .Build();
             //    options.Filters.Add(new AuthorizeFilter(policy));
-            ////});
-            //var emailConfig = Configuration
-            //   .GetSection("EmailConfiguration")
-            //     .Get<EmailConfiguration>();
-            //services.AddSingleton(emailConfig);
+            //});
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("RequireAdministratorRole",
+                     policy => policy.RequireRole("Admin"));
+                options.AddPolicy("CreateCoursePolicy",
+                     policy => policy.RequireClaim("Create Course"));
+                options.AddPolicy("UpdateCoursePolicy",
+                     policy => policy.RequireClaim("Update Course"));
+                options.AddPolicy("DetailCoursePolicy",
+                     policy => policy.RequireClaim("Detail Course"));
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -75,9 +82,9 @@ namespace EduHomeASPNET
             app.UseStaticFiles();
 
             app.UseRouting();
-
-            app.UseAuthorization();
             app.UseAuthentication();
+            app.UseAuthorization();
+            
 
             app.UseEndpoints(endpoints =>
             {

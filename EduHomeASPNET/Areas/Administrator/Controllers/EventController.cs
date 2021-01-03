@@ -11,6 +11,7 @@ using FrontToUp.Extentions;
 using FrontToUp.Helpers;
 using MailKit.Net.Smtp;
 using MailKit.Security;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -22,6 +23,7 @@ using MimeKit.Text;
 namespace EduHomeASPNET.Areas.Administrator.Controllers
 {
     [Area("Administrator")]
+    [Authorize(Policy = "RequireAdministratorRole")]
     public class EventController : Controller
     {
         private readonly AppDbContext _context;

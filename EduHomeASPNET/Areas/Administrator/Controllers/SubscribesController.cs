@@ -7,10 +7,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using EduHomeASPNET.DAL;
 using EduHomeASPNET.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace EduHomeASPNET.Areas.Administrator.Controllers
 {
     [Area("Administrator")]
+    [Authorize(Policy = "RequireAdministratorRole")]
     public class SubscribesController : Controller
     {
         private readonly AppDbContext _context;

@@ -7,6 +7,7 @@ using EduHomeASPNET.DAL;
 using EduHomeASPNET.Models;
 using FrontToUp.Extentions;
 using FrontToUp.Helpers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -15,6 +16,7 @@ using Microsoft.EntityFrameworkCore;
 namespace EduHomeASPNET.Areas.Administrator.Controllers
 {
     [Area("Administrator")]
+    [Authorize(Policy = "RequireAdministratorRole")]
     public class TeacherController : Controller
     {
 

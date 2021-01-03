@@ -1,0 +1,22 @@
+﻿@model AppUser
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h2>Delete</h2>
+
+<div class="card mb-3">
+    <div class="card-body">
+        <h5 class="card-title">@Model.UserName</h5>
+    </div>
+    <div class="card-footer">
+        <div class="card-footer">
+            <a asp-controller="Administrator" asp-action="ListUsers"
+               asp-route-id="@Model.Id" class="btn btn-primary">Cancel</a>
+            <form method="post" asp-action="DeleteUser" asp-route-id="@Model.Id">
+                <button type="submit" class="btn btn-danger">Delete</button>
+            </form>
+        </div>
+    </div>
+</div>
+

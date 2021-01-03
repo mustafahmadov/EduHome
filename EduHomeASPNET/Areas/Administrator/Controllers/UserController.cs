@@ -5,12 +5,14 @@ using System.Threading.Tasks;
 using EduHomeASPNET.DAL;
 using EduHomeASPNET.Models;
 using EduHomeASPNET.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EduHomeASPNET.Controllers
 {
     [Area("Administrator")]
+    [Authorize(Policy = "RequireAdministratorRole")]
     public class UserController : Controller
     {
         private readonly UserManager<AppUser> _userManager;

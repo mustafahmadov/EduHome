@@ -2,6 +2,7 @@
 using EduHomeASPNET.Models;
 using FrontToUp.Extentions;
 using FrontToUp.Helpers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -14,6 +15,8 @@ using System.Threading.Tasks;
 namespace EduHomeASPNET.Areas.Administrator.Controllers
 {
     [Area("Administrator")]
+    //[Authorize(Roles ="Admin")]
+    [Authorize(Policy = "RequireAdministratorRole")]
     public class CourseController : Controller
     {
         private readonly AppDbContext _context;
@@ -30,6 +33,7 @@ namespace EduHomeASPNET.Areas.Administrator.Controllers
                 .Include(c => c.CourseDetail).ToList();
             return View(courses);
         }
+        [Authorize(Policy = "CreateCoursePolicy")]
         public async Task<IActionResult> Detail(int? id)
         {
             if (id == null) return NotFound();
@@ -38,6 +42,7 @@ namespace EduHomeASPNET.Areas.Administrator.Controllers
 
             return View(course);
         }
+        [Authorize(Policy = "CreateCoursePolicy")]
         public IActionResult Create()
         {
             ViewBag.Categories = _context.Categories.Where(c=>c.HasDeleted==false).ToList();
@@ -46,6 +51,7 @@ namespace EduHomeASPNET.Areas.Administrator.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Policy = "CreateCoursePolicy")]
         public async Task<IActionResult> Create(Course course, List<int> TagId,List<int> CategoryId)
         {
             Course nCourse = new Course();
@@ -157,7 +163,7 @@ namespace EduHomeASPNET.Areas.Administrator.Controllers
 
             return RedirectToAction(nameof(Index));
         }
-
+        [Authorize(Policy = "UpdateCoursePolicy")]
         public IActionResult Update(int? id)
         {
             Course course = _context.Courses.Where(cr => cr.HasDeleted == false)
@@ -166,6 +172,8 @@ namespace EduHomeASPNET.Areas.Administrator.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Policy = "UpdateCoursePolicy")]
+
         public async Task<IActionResult> Update(int? id, Course course)
         {
             if (id == null) return NotFound();
