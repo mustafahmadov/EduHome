@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Threading.Tasks;
 using EduHomeASPNET.DAL;
 using EduHomeASPNET.Models;
@@ -129,6 +131,45 @@ namespace EduHomeASPNET.Controllers
                 
             }
             return RedirectToAction("Index","Home");
+        }
+        public IActionResult Reply()
+        {
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Reply(ReplyVM replyVM)
+        {
+            if (ModelState.IsValid)
+            {
+                System.Net.Mail.SmtpClient client = new System.Net.Mail.SmtpClient()
+                {
+                    Host = "smtp.gmail.com",
+                    Port = 587,
+                    EnableSsl = true,
+                    DeliveryMethod = SmtpDeliveryMethod.Network,
+                    UseDefaultCredentials = false,
+                    Credentials = new NetworkCredential()
+                    {
+                        UserName = "mustafaahmadov8@gmail.com",
+                        Password = "Araz2006"
+                    }
+                };
+                MailAddress fromEmail = new MailAddress("mustafaahmadov8@gmail.com", replyVM.Name);
+                MailAddress toEmail = new MailAddress("mustafa.ehmedov1999@gmail.com", replyVM.Name);
+                MailMessage message = new MailMessage()
+                {
+                    From = fromEmail,
+                    Subject = replyVM.Subject,
+                    Body = replyVM.Message
+                };
+                message.To.Add(toEmail);
+                client.Send(message);
+                
+
+            }
+            return RedirectToAction("Index","Home");
+
         }
 
         //public async Task CreateRole()

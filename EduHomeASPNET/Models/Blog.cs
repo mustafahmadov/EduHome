@@ -17,7 +17,7 @@ namespace EduHomeASPNET.Models
         [NotMapped]
         public IFormFile Photo { get; set; }
         public string Description { get; set; }
-        public DateTime? PostedTime { get; set; }
+        public DateTime PostedTime { get; set; }
         public int CommentsCount { get; set; }
         public bool HasDeleted { get; set; }
         public DateTime? DeletedTime { get; set; }

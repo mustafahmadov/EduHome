@@ -152,8 +152,16 @@ namespace EduHomeASPNET.Areas.Administrator.Controllers
             newEvent.EndTime = eve.EndTime;
             newEvent.EventDetailId = newEventDetail.Id;
 
+
+
             await _context.Events.AddAsync(newEvent);
             await _context.SaveChangesAsync();
+
+            List<SubscribedEmail> emails = _context.SubscribedEmails.Where(e => e.HasDeleted == false).ToList();
+            foreach (SubscribedEmail email in emails)
+            {
+                SendEmail(email.Email, "Yeni bir event yaradildi.", "<h1>Yeni bir event yaradildi</h1>");
+            }
 
             newEventDetail.HasDeleted = false;
             newEventDetail.DetailedPlacedArea = eve.EventDetail.DetailedPlacedArea;
@@ -163,15 +171,13 @@ namespace EduHomeASPNET.Areas.Administrator.Controllers
             newEventDetail.EventId = newEvent.Id;
             newEvent.EventDetailId = newEventDetail.Id;
 
+            
+
 
             await _context.EventDetails.AddAsync(newEventDetail);
             await _context.SaveChangesAsync();
 
-            List<SubscribedEmail> emails = _context.SubscribedEmails.Where(e => e.HasDeleted == false).ToList();
-            foreach (SubscribedEmail email in emails)
-            {
-                await SendEmailAsync(email.Email, "Yeni bir event yaradildi.", "<h1>Yeni bir event yaradildi</h1>");
-            }
+            
 
             return RedirectToAction(nameof(Index));
         }
@@ -265,7 +271,7 @@ namespace EduHomeASPNET.Areas.Administrator.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
-        public async Task SendEmailAsync(string email, string subject, string htmlMessage)
+        public void SendEmail(string email, string subject, string htmlMessage)
         {
             System.Net.Mail.SmtpClient client = new System.Net.Mail.SmtpClient()
             {

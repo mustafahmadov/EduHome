@@ -31,14 +31,12 @@
                         <div class="course-details-right">
                             <h3>COURSE FEATURES</h3>
                             <ul>
-                                <li>duration <span>6 Month</span></li>
-                                <li>class duration <span>3 hours</span></li>
-                                <li>skill level <span>all level</span></li>
-                                <li>language <span>english</span></li>
-                                <li>students <span>420</span></li>
-                                <li>assesments <span>self</span></li>
+                                <li>duration <span>@Model.CourseDetail.Duration</span></li>
+                                <li>class duration <span>@Model.CourseDetail.ClassDuration</span></li>
+                                <li>skill level <span>@Model.CourseDetail.SkillLevel</span></li>
+                                <li>language <span>@Model.CourseDetail.Language</span></li>
+                                <li>students <span>@Model.CourseDetail.StudentsCount</span></li>
                             </ul>
-                            <h3 class="red">course fee $789</h3>
                         </div>
                     </div>
                     @await Component.InvokeAsync("Reply")

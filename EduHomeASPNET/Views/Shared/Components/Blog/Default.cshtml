@@ -11,7 +11,7 @@
         </div>
         <div class="blog-content">
             <div class="blog-top">
-                <p>By @blog.Author.FullName  /  June 20, 2017  /  <i class="fa fa-comments-o"></i> @blog.CommentsCount</p>
+                <p>By @blog.Author.FullName  /  @blog.PostedTime.ToString("dd MMM yyy")  /  <i class="fa fa-comments-o"></i> @blog.CommentsCount</p>
             </div>
             <div class="blog-bottom">
                 <h2><a asp-controller="Blog" asp-action="BlogDetail" asp-route-id="@blog.Id">@blog.Description</a></h2>

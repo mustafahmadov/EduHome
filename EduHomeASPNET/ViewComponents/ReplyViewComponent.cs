@@ -1,5 +1,6 @@
 ﻿using EduHomeASPNET.DAL;
 using EduHomeASPNET.Models;
+using EduHomeASPNET.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -17,8 +18,8 @@ namespace EduHomeASPNET.ViewComponents
         }
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            List<Blog> blogs = _context.Blogs.Where(b => b.HasDeleted == false).ToList();
-            return View(await Task.FromResult(blogs));
+            ReplyVM replyVM = new ReplyVM();
+            return View(await Task.FromResult(replyVM));
         }
     }
 }

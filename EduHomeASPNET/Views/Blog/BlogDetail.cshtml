@@ -2,7 +2,6 @@
 @{
     ViewData["Title"] = "BlogDetail";
 }
-
 <!-- Blog Start -->
 <div class="blog-details-area pt-150 pb-140">
     <div class="container">
@@ -10,11 +9,11 @@
             <div class="col-md-8">
                 <div class="blog-details">
                     <div class="blog-details-img">
-                        <img src="~/assets/img/blog/@Model.Image" alt="blog-details">
+                        <img src="~/assets/img/blog/@Model.Image" alt="blog-details" style="width:757px;height:481px">
                     </div>
                     <div class="blog-details-content">
                         <h2>@Model.Description</h2>
-                        <h6>By @Model.Author.FullName /  June 20, 2017  /  <i class="fa fa-comments-o"></i> @Model.CommentsCount</h6>
+                        <h6>By @Model.Author.FullName /  @Model.PostedTime.ToString("dd MMM yyy") /  <i class="fa fa-comments-o"></i> @Model.CommentsCount</h6>
                         <p>@Model.BlogDetail.FirstContent </p>
                         <p>@Model.BlogDetail.SecondContent </p>
                         <p class="quote">@Model.BlogDetail.ThirdContent </p>
