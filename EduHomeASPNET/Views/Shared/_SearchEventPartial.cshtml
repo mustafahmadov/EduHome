@@ -1,7 +1,7 @@
-﻿@model IEnumerable<Course>
-@foreach (Course item in Model)
+﻿@model IEnumerable<Event>
+@foreach (Event item in Model)
 {
 <li style="display: flex; background: white; padding: 5px;">
-    <a asp-action="CourseDetail" asp-route-id="@item.Id">@item.Name</a>
+    <a asp-action="EventDetail" asp-route-id="@item.Id">@item.Name</a>
 </li>
 }

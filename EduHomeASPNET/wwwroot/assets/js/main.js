@@ -8,7 +8,7 @@
         $(document).on('keyup', searchInput, function () {
             let search = $(searchInput).val().trim();
             let responseArea = $(searchAreaClassName).next();
-            responseArea.children('li').slice(1).remove();
+            responseArea.children('li').slice(0).remove();
             if (search.length > 0) {
                 $.ajax({
 

@@ -38,5 +38,11 @@ namespace EduHomeASPNET.Controllers
            
             return View(eventVM);
         }
+
+        public IActionResult Search(string search)
+        {
+            IEnumerable<Event> model = _context.Events.Where(t => t.Name.Contains(search)&&t.HasDeleted==false).Take(6);
+            return PartialView("_SearchEventPartial", model);
+        }
     }
 }

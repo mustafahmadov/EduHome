@@ -4,204 +4,186 @@
 @inject UserManager<AppUser> userManager;
 @if (TempData["controllerName"].ToString() == "Home")
 {<!-- Header Area Start -->
-                <header class="top">
-                    <div class="header-area header-sticky fixed">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-md-3 col-sm-3 col-xs-6">
-                                    <div class="logo">
-                                        <a href="index.html"><img src="~/assets/img/logo/@Model.Logo" alt="eduhome" /></a>
-                                    </div>
-                                </div>
-                                <div class="col-md-9 col-sm-9 col-xs-12">
-                                    <div class="content-wrapper one">
-                                        <!-- Main Menu Start -->
-                                        <div class="main-menu one text-right">
-                                            <nav>
-                                                <ul>
-                                                    <li>
-                                                        <a asp-controller="Home" asp-action="Index">Home</a>
-                                                    </li>
-                                                    <li><a asp-controller="About" asp-action="Index">About</a></li>
-                                                    <li>
-                                                        <a a asp-controller="Course" asp-action="Index">courses</a>
-                                                    </li>
-                                                    <li>
-                                                        <a a asp-controller="Event" asp-action="Index">event</a>
-                                                    </li>
-                                                    <li class="hidden-sm">
-                                                        <a a asp-controller="Teacher" asp-action="Index">teacher</a>
-                                                    </li>
-                                                    <li>
-                                                        <a a asp-controller="Blog" asp-action="Index">blog</a>
-                                                    </li>
-                                                    <li><a a asp-controller="Contact" asp-action="Index">Contact</a></li>
-                                                    @if (signInManager.IsSignedIn(User))
-                                                    {
-                                                          <li><a asp-controller="Account" asp-action="Logout">logout</a></li> 
-                                                    }
-                                                    else
-                                                    {
-                                                          <li><a asp-controller="Account" asp-action="Login">login</a></li>
-                                                          <li><a asp-controller="Account" asp-action="Register">register</a></li>
-                                                    }
-                                                    @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
-                                                    {
-                                                        <li class="nav-item dropdown">
-                                                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
-                                                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                Manage
-                                                            </a>
-                                                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                                                <a class="dropdown-item" asp-area="Administrator" asp-controller="Administrator"
-                                                                   asp-action="ListUsers">Users</a>
-                                                                <a class="dropdown-item" asp-area="Administrator" asp-controller="Administrator"
-                                                                   asp-action="ListRoles">Roles</a>
-                                                            </div>
-                                                        </li>
-                                                    }
-
-                                                </ul>
-                                            </nav>
+                    <header class="top">
+                        <div class="header-area header-sticky fixed">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-3 col-sm-3 col-xs-6">
+                                        <div class="logo">
+                                            <a href="index.html"><img src="~/assets/img/logo/@Model.Logo" alt="eduhome" /></a>
                                         </div>
-                                        <div class="mobile-menu hidden-lg hidden-md one"></div>
-                                        <!-- Main Menu End -->
+                                    </div>
+                                    <div class="col-md-9 col-sm-9 col-xs-12">
+                                        <div class="content-wrapper one">
+                                            <!-- Main Menu Start -->
+                                            <div class="main-menu one text-right">
+                                                <nav>
+                                                    <ul>
+                                                        <li>
+                                                            <a asp-controller="Home" asp-action="Index">Home</a>
+                                                        </li>
+                                                        <li><a asp-controller="About" asp-action="Index">About</a></li>
+                                                        <li>
+                                                            <a a asp-controller="Course" asp-action="Index">courses</a>
+                                                        </li>
+                                                        <li>
+                                                            <a a asp-controller="Event" asp-action="Index">event</a>
+                                                        </li>
+                                                        <li class="hidden-sm">
+                                                            <a a asp-controller="Teacher" asp-action="Index">teacher</a>
+                                                        </li>
+                                                        <li>
+                                                            <a a asp-controller="Blog" asp-action="Index">blog</a>
+                                                        </li>
+                                                        <li><a a asp-controller="Contact" asp-action="Index">Contact</a></li>
+                                                        @if (signInManager.IsSignedIn(User))
+                                                        {
+                                                    <li><a asp-controller="Account" asp-action="Logout">logout</a></li> }
+                                                                    else
+                                                                    {
+                                                    <li><a asp-controller="Account" asp-action="Login">login</a></li>
+                                                                        <li><a asp-controller="Account" asp-action="Register">register</a></li>}
+                                                        @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                                                        {
+                                                    <li class="nav-item">
+                                                        <a class="nav-link" asp-controller="Administrator" asp-action="Dashboard">
+                                                            Go to Admin
+                                                        </a>
+                                                    </li>
+}
+                                                        @if (User.Identity.IsAuthenticated && User.IsInRole("CourseModerator"))
+                                                        {
+                                                    <li class="nav-item">
+                                                        <a class="nav-link" asp-controller="Administrator" asp-action="Course">
+                                                            Edit Course
+                                                        </a>
+                                                    </li>}
+
+                                                    </ul>
+                                                </nav>
+                                            </div>
+                                            <div class="mobile-menu hidden-lg hidden-md one"></div>
+                                            <!-- Main Menu End -->
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </header> <!-- Header Area End --> }
-                                            else
-                                            { <!-- Header Area Start -->
-                                                <header class="top">
-                                                    <div class="header-top">
-                                                        <div class="container">
-                                                            <div class="row">
-                                                                <div class="col-md-8 col-sm-8 col-xs-12">
-                                                                    <div class="header-top-left">
-                                                                        <p>HAVE ANY QUESTION ?  +880 5698  598  6587</p>
+                    </header> <!-- Header Area End --> }
+                                else
+                                { <!-- Header Area Start -->
+                                                    <header class="top">
+                                                        <div class="header-top">
+                                                            <div class="container">
+                                                                <div class="row">
+                                                                    <div class="col-md-8 col-sm-8 col-xs-12">
+                                                                        <div class="header-top-left">
+                                                                            <p>HAVE ANY QUESTION ?  +880 5698  598  6587</p>
+                                                                        </div>
                                                                     </div>
-                                                                </div>
-                                                                <div class="col-md-4 col-sm-4 col-xs-12">
-                                                                    <div class="header-top-right text-right">
-                                                                        <ul>
-                                                                            @if (User.Identity.IsAuthenticated)
-                                                                            {
-                                                                                <li><a>@User.Identity.Name</a></li> }
-                                                                                                else
-                                                                                                {
-                                                                                <li><a asp-controller="Account" asp-action="Register">register</a></li>}
-                                                                            @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
-                                                                            {
-                                                                        <li class="nav-item">
-                                                                            <a class="nav-link" asp-controller="Administrator" asp-action="Dashboard">
-                                                                                Go to Admin
-                                                                            </a>
-                                                                        </li>}
-                                                                            @if (User.Identity.IsAuthenticated && User.IsInRole("CourseModerator"))
-                                                                            {
-                                                                              <li class="nav-item">
-                                                                                  <a class="nav-link" asp-controller="Administrator" asp-action="Course">
-                                                                                      Edit Course
-                                                                                  </a>
-                                                                              </li>
-                                                                            }
-                                                                        </ul>
+                                                                    <div class="col-md-4 col-sm-4 col-xs-12">
+                                                                        <div class="header-top-right text-right">
+                                                                            <ul>
+                                                                                @if (User.Identity.IsAuthenticated)
+                                                                                {
+                                                                <li><a>@User.Identity.Name</a></li> }
+                                                                                else
+                                                                                {
+                                                                <li><a asp-controller="Account" asp-action="Register">register</a></li>}
+                                                                                @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                                                                                {
+                                                                <li class="nav-item">
+                                                                    <a class="nav-link" asp-controller="Administrator" asp-action="Dashboard">
+                                                                        Go to Admin
+                                                                    </a>
+                                                                </li>           }
+                                                                                @if (User.Identity.IsAuthenticated && User.IsInRole("CourseModerator"))
+                                                                                {
+                                                                <li class="nav-item">
+                                                                    <a class="nav-link" asp-controller="Administrator" asp-action="Course">
+                                                                        Edit Course
+                                                                    </a>
+                                                                </li>
+                                                                                }
+                                                                            </ul>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="header-area two header-sticky">
-                                                        <div class="container">
-                                                            <div class="row">
-                                                                <div class="col-md-3 col-sm-3 col-xs-6">
-                                                                    <div class="logo">
-                                                                        <a href="index.html"><img src="~/assets/img/logo/logo2.png" alt="eduhome" /></a>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-9 col-sm-9 col-xs-6">
-                                                                    <div class="content-wrapper text-right">
-                                                                        <!-- Main Menu Start -->
-                                                                        <div class="main-menu">
-                                                                            <nav>
-                                                                                <ul>
-                                                                                    <li>
-                                                                                        <a asp-controller="Home" asp-action="Index">Home</a>
-                                                                                    </li>
-                                                                                    <li><a asp-controller="About" asp-action="Index">About</a></li>
-                                                                                    <li>
-                                                                                        <a a asp-controller="Course" asp-action="Index">courses</a>
-                                                                                    </li>
-                                                                                    <li>
-                                                                                        <a a asp-controller="Event" asp-action="Index">event</a>
-                                                                                    </li>
-                                                                                    <li class="hidden-sm">
-                                                                                        <a a asp-controller="Teacher" asp-action="Index">teacher</a>
-                                                                                    </li>
-                                                                                    <li>
-                                                                                        <a a asp-controller="Blog" asp-action="Index">blog</a>
-                                                                                    </li>
-                                                                                    <li><a a asp-controller="Contact" asp-action="Index">Contact</a></li>
-                                                                                    @if (User.Identity.IsAuthenticated)
-                                                                                    {
-                                                                                           <li><a asp-controller="Account" asp-action="Logout">logout</a></li> 
-                                                                                     }
-                                                                                    else
-                                                                                    {
-                                                                                            <li><a asp-controller="Account" asp-action="Login">login</a></li>
-                                                                                    }
-
-                                                                                </ul>
-                                                                            </nav>
-
+                                                        <div class="header-area two header-sticky">
+                                                            <div class="container">
+                                                                <div class="row">
+                                                                    <div class="col-md-3 col-sm-3 col-xs-6">
+                                                                        <div class="logo">
+                                                                            <a href="index.html"><img src="~/assets/img/logo/logo2.png" alt="eduhome" /></a>
                                                                         </div>
-                                                                        <div class="search-btn @TempData["controllerName"]">
-                                                                            <ul data-toggle="dropdown" class="header-search search-toggle">
-                                                                                <li class="search-menu">
-                                                                                    <i class="fa fa-search"></i>
-                                                                                </li>
-                                                                            </ul>
-                                                                            <div class="search">
-                                                                                <div class="search-form">
-                                                                                    <form id="search-form" class="search-form-@TempData["controllerName"]">
-                                                                                        <input placeholder="Search here..." name="search" id="search" />
-                                                                                        <button type="submit">
-                                                                                            <span><i class="fa fa-search"></i></span>
-                                                                                        </button>
+                                                                    </div>
+                                                                    <div class="col-md-9 col-sm-9 col-xs-6">
+                                                                        <div class="content-wrapper text-right">
+                                                                            <!-- Main Menu Start -->
+                                                                            <div class="main-menu">
+                                                                                <nav>
+                                                                                    <ul>
+                                                                                        <li>
+                                                                                            <a asp-controller="Home" asp-action="Index">Home</a>
+                                                                                        </li>
+                                                                                        <li><a asp-controller="About" asp-action="Index">About</a></li>
+                                                                                        <li>
+                                                                                            <a a asp-controller="Course" asp-action="Index">courses</a>
+                                                                                        </li>
+                                                                                        <li>
+                                                                                            <a a asp-controller="Event" asp-action="Index">event</a>
+                                                                                        </li>
+                                                                                        <li class="hidden-sm">
+                                                                                            <a a asp-controller="Teacher" asp-action="Index">teacher</a>
+                                                                                        </li>
+                                                                                        <li>
+                                                                                            <a a asp-controller="Blog" asp-action="Index">blog</a>
+                                                                                        </li>
+                                                                                        <li><a a asp-controller="Contact" asp-action="Index">Contact</a></li>
+                                                                                        @if (User.Identity.IsAuthenticated)
+                                                                                        {
+                                                                                              <li><a asp-controller="Account" asp-action="Logout">logout</a></li> 
+                                                                                        }
+                                                                                        else
+                                                                                        {
+                                                                                              <li><a asp-controller="Account" asp-action="Login">login</a></li>
+                                                                                        }
 
-                                                                                    </form>
-                                                                                    <ul id="searchList">
                                                                                     </ul>
+                                                                                </nav>
+
+                                                                            </div>
+                                                                            <div class="search-btn @TempData["controllerName"]">
+                                                                                <ul data-toggle="dropdown" class="header-search search-toggle">
+                                                                                    <li class="search-menu">
+                                                                                        <i class="fa fa-search"></i>
+                                                                                    </li>
+                                                                                </ul>
+                                                                                <div class="search">
+                                                                                    <div class="search-form">
+                                                                                        <form id="search-form" class="search-form-@TempData["controllerName"]">
+                                                                                            <input placeholder="Search here..." name="search" id="search" />
+                                                                                            <button type="submit">
+                                                                                                <span><i class="fa fa-search"></i></span>
+                                                                                            </button>
+
+                                                                                        </form>
+                                                                                        <ul id="searchList">
+                                                                                        </ul>
+                                                                                    </div>
                                                                                 </div>
                                                                             </div>
-                                                                        </div>
 
-                                                                        <!--End of Search Form-->
-                                                                        <!-- Main Menu End -->
+                                                                            <!--End of Search Form-->
+                                                                            <!-- Main Menu End -->
+                                                                        </div>
                                                                     </div>
-                                                                </div>
-                                                                <div class="col-xs-12">
-                                                                    <div class="mobile-menu hidden-lg hidden-md hidden-sm"></div>
+                                                                    <div class="col-xs-12">
+                                                                        <div class="mobile-menu hidden-lg hidden-md hidden-sm"></div>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                </header> <!-- Header Area End --> <!-- Banner Area Start -->
-                                                                                                <div class="banner-area-wrapper">
-                                                                                                    <div class="banner-area text-center">
-                                                                                                        <div class="container">
-                                                                                                            <div class="row">
-                                                                                                                <div class="col-xs-12">
-                                                                                                                    <div class="banner-content-wrapper">
-                                                                                                                        <div class="banner-content">
-                                                                                                                            <h2>@ViewBag.Title</h2>
-                                                                                                                        </div>
-                                                                                                                    </div>
-                                                                                                                </div>
-                                                                                                            </div>
-                                                                                                        </div>
-                                                                                                    </div>
-                                                                                                </div> <!-- Banner Area End -->}
-
+                                                    </header> <!-- Header Area End --> <!-- Banner Area Start -->}
