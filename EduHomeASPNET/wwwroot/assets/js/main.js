@@ -1,5 +1,3 @@
-
-
 (function ($) {
 "use strict";  
     const SearchAjax = (searchAreaClassName) => {
