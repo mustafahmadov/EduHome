@@ -47,7 +47,7 @@ namespace EduHomeASPNET.Controllers
         }
         public IActionResult Search(string search)
         {
-            IEnumerable<Course> model = _context.Courses.Where(t => t.Name.Contains(search)).Take(8);
+            IEnumerable<Course> model = _context.Courses.Where(t => t.HasDeleted == false && t.Name.Contains(search)).ToList();
             return PartialView("_SearchCoursePartial", model);
         }
     }
