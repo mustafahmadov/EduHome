@@ -61,21 +61,33 @@
                         <h4 class="text-info">Tags</h4>
                         @foreach (Tag tag in ViewBag.Tags)
                         {
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="TagId" value="@tag.Id">
-                    <label class="form-check-label">
-                        @tag.Name
-                    </label>
-                </div>
-                }
+                       <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="TagId" value="@tag.Id">
+                        <label class="form-check-label">
+                            @tag.Name
+                        </label>
+                        </div>
+                        }
+                    </div>
+                    <div class="col-md-6">
+                        <h4 class="text-info">Categories</h4>
+                        @foreach (Category category in ViewBag.Categories)
+                        {
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="CategoryId" value="@category.Id">
+                                <label class="form-check-label">
+                                    @category.Name
+                                </label>
+                            </div>
+                        }
                     </div>
                     <div class="col-md-6">
                         <h4 class="text-info">Speakers</h4>
                         @foreach (Speaker speaker in ViewBag.Speakers)
                         {
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="SpeakerId" value="@speaker.Id">
-                    <label class="form-check-label">
+                           <div class="form-check">
+                           <input class="form-check-input" type="checkbox" name="SpeakerId" value="@speaker.Id">
+                           <label class="form-check-label">
                         @speaker.Fullname
                     </label>
                 </div>}

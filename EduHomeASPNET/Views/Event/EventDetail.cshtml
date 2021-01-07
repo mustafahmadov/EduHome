@@ -25,21 +25,21 @@
                         <p>@Model.Event.EventDetail.ThirdContent</p>
                         <div class="speakers-area fix">
                             <h4>speaker</h4>
-                            @foreach (Speaker speaker in Model.Speakers)
-                            {
-                                if (speaker.Id == Model.SpeakerEvents.FirstOrDefault().SpeakerId)
-                                {
-                                    <div class="single-speaker">
+                             @foreach (SpeakerEvent item in Model.Event.SpeakerEvents)
+                             {
+                                 <div class="single-speaker">
                                         <div class="speaker-img">
-                                            <img src="~/assets/img/teacher/@speaker.Image" alt="speaker" style="width:100px;height:120px">
+                                            <img src="~/assets/img/teacher/@item.Speaker.Image" alt="speaker" style="width:100px;height:120px">
                                         </div>
                                         <div class="speaker-name">
-                                            <h5>@speaker.Fullname</h5>
-                                            <p>@speaker.Position</p>
+                                            <h5>@item.Speaker.Fullname</h5>
+                                            <p>@item.Speaker.Position</p>
                                         </div>
                                     </div>
-                                }
-                            }
+                             }
+                            
+                                    
+                               
                         </div>
                     </div>
                     @await Component.InvokeAsync("Reply")

@@ -19,5 +19,7 @@ namespace EduHomeASPNET.Models
         public string Image { get; set; }
         [NotMapped]
         public IFormFile Photo { get; set; }
+
+        public virtual ICollection<SpeakerEvent> SpeakerEvents { get; set; }
     }
 }

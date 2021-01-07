@@ -44,6 +44,8 @@ namespace EduHomeASPNET.DAL
         public DbSet<SubscribedEmail> SubscribedEmails { get; set; }
         public DbSet<ContactDetail> ContactDetails { get; set; }
         public DbSet<Map> Maps { get; set; }
+        public DbSet<CategoryBlog> CategoryBlogs { get; set; }
+        public DbSet<CategoryEvent> CategoryEvents { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

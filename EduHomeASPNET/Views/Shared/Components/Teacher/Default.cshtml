@@ -1,8 +1,8 @@
 ﻿@model List<Teacher> 
 @foreach (Teacher teacher in Model)
 {
-<div class="col-md-3 col-sm-4 col-xs-12 mt-5">
-    <div class="single-teacher ">
+<div class="col-md-3 col-sm-4 col-xs-12">
+    <div class="single-teacher " style="margin-top: 30px!important">
         <div class="single-teacher-img">
             <a asp-controller="Teacher" asp-action="TeacherDetail" asp-route-id="@teacher.Id">
                   <img src="~/assets/img/teacher/@teacher.Image" alt="teacher">

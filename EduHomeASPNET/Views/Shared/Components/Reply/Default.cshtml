@@ -26,6 +26,14 @@
                 <span asp-validation-for="Message"></span>
             </div>
         </div>
-        <button class="default-btn" type="submit"><span>send</span></button>
+        <button class="default-btn" id="reply" type="submit"><span>send</span></button>
     </form>
 </div>
+@section Scripts{ 
+            <script>
+             $("#reply").click(function () {
+             $(this).prop("disabled", true)
+             $(this).css("cursor", "not-allowed")
+             });
+            </script>
+}

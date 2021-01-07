@@ -25,6 +25,7 @@ namespace EduHomeASPNET.Models
         public BlogDetail BlogDetail { get; set; }
         public int AuthorId { get; set; }
         public Author Author { get; set; }
+        public virtual ICollection<CategoryBlog> CategoryBlogs { get; set; }
 
     }
 }

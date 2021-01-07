@@ -50,13 +50,15 @@ namespace EduHomeASPNET.Areas.Administrator.Controllers
         {
             ViewBag.Tags = _context.Tags.Where(t => t.HasDeleted == false).ToList();
             ViewBag.Authors = _context.Authors.ToList();
+            ViewBag.Categories = _context.Categories.Where(c=>c.HasDeleted==false).ToList();
             return View();
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Blog blog,int? AuthorId, List<int> TagId)
+        public async Task<IActionResult> Create(Blog blog,int? AuthorId, List<int> TagId,List<int> CategoryId)
         {
             ViewBag.Tags = _context.Tags.Where(t => t.HasDeleted == false).ToList();
+            ViewBag.Categories = _context.Categories.Where(c => c.HasDeleted == false).ToList();
             ViewBag.Authors = _context.Authors.ToList();
             Blog newBlog = new Blog();
             BlogDetail newBlogDetail = new BlogDetail();
@@ -84,6 +86,7 @@ namespace EduHomeASPNET.Areas.Administrator.Controllers
             
 
             List<BlogTag> BlogTags = new List<BlogTag>();
+            List<CategoryBlog> CategoryBlogs = new List<CategoryBlog>();
             
             if (TagId.Count == 0)
             {
@@ -91,6 +94,17 @@ namespace EduHomeASPNET.Areas.Administrator.Controllers
                 return View();
             }
 
+            foreach (int id in CategoryId)
+            {
+                CategoryBlog categoryBlog = new CategoryBlog()
+                {
+                    BlogId = newBlog.Id,
+                    CategoryId = id,
+                    Blog = newBlog
+                };
+                CategoryBlogs.Add(categoryBlog);
+                await _context.CategoryBlogs.AddAsync(categoryBlog);
+            }
             foreach (int id in TagId)
             {
                 BlogTag BlogTag = new BlogTag()
@@ -101,6 +115,12 @@ namespace EduHomeASPNET.Areas.Administrator.Controllers
                 };
                 BlogTags.Add(BlogTag);
                 await _context.BlogTags.AddAsync(BlogTag);
+            }
+            if (AuthorId == null)
+            {
+                ModelState.AddModelError("AuthorId", "ksfkdfjkdshkj");
+                ViewBag.SelectError = "Please select author";
+                return View();
             }
             newBlog.AuthorId = (int)AuthorId;
             //newBlog.AuthorId = blog.Author.Id;

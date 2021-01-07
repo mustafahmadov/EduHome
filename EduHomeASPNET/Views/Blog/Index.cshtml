@@ -1,13 +1,15 @@
-﻿@model List<Blog>
+﻿@model List<CategoryBlog>
 @{
     ViewData["Title"] = "Blog";
 }
 <div class="blog-area pt-150 pb-150">
     <div class="container">
-        <div class="row">
-            @await Component.InvokeAsync("Blog", new { page = ViewBag.Page, take = 6 })
-        </div>
-        <div class="row">
+        @if (ViewBag.CatBlogId == null)
+        {
+            <div class="row">
+                @await Component.InvokeAsync("Blog", new { page = ViewBag.Page, take = 6 })
+            </div>
+            <div class="row">
                 <div class="col-xs-12 text-center">
                     <div class="pagination d-flex justify-content-center align-item-center text-center">
                         <ul>
@@ -31,5 +33,33 @@
                     </div>
                 </div>
             </div>
+
+        }
+        else
+        {
+            @foreach (CategoryBlog blog in Model)
+            {
+    <div class="col-md-4 col-sm-6 col-xs-12">
+      
+        <div class="single-blog mb-40">
+            <div class="blog-img">
+                <a asp-controller="Blog" asp-action="BlogDetail" asp-route-id="@blog.Blog.Id"><img src="~/assets/img/blog/@blog.Blog.Image" alt="blog"></a>
+                <div class="blog-hover">
+                    <a asp-controller="Blog" asp-action="BlogDetail" asp-route-id="@blog.Blog.Id"><i class="fa fa-link"></i></a>
+                </div>
+            </div>
+            <div class="blog-content">
+                <div class="blog-top">
+                    <p>By @blog.Blog.Author.FullName  /  @blog.Blog.PostedTime.ToString("dd MMM yyy")  /  <i class="fa fa-comments-o"></i> @blog.Blog.CommentsCount</p>
+                </div>
+                <div class="blog-bottom">
+                    <h2><a asp-controller="Blog" asp-action="BlogDetail" asp-route-id="@blog.Blog.Id">@blog.Blog.Description</a></h2>
+                    <a asp-controller="Blog" asp-action="BlogDetail" asp-route-id="@blog.Blog.Id">read more</a>
+                </div>
+            </div>
+        </div>
+    </div>}
+        }
+
     </div>
 </div>

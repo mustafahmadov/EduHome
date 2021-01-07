@@ -21,16 +21,20 @@ namespace EduHomeASPNET.Controllers
             _logger = logger;
             _context = context;
         }
-        public IActionResult Index(int? page)
+        public IActionResult Index(int? page,int? categoryCourseId)
         {
             TempData["controllerName"] = this.ControllerContext.RouteData.Values["controller"].ToString();
-            ViewBag.PageCount = Decimal.Ceiling((decimal)_context.Courses.Where(t => t.HasDeleted == false).Count() / 6);
-            ViewBag.Page = page;
-            if (page == null)
+            ViewBag.CatId = categoryCourseId;
+            if (categoryCourseId == null)
             {
-                return View(_context.Courses.Where(t => t.HasDeleted == false).Take(6).ToList());
+                ViewBag.PageCount = Decimal.Ceiling((decimal)_context.Courses
+                                               .Where(t => t.HasDeleted == false).Count() / 6);
+                ViewBag.Page = page;
             }
-            return View(_context.Courses.Where(t => t.HasDeleted == false).Skip(((int)page - 1) * 6).Take(6).ToList());
+            List<CategoryCourse> courses = _context.CategoryCourses.Include(c => c.Course)
+                         .Include(c => c.Category).Where(c=>c.CategoryId==categoryCourseId && c.Course.HasDeleted==false).ToList();
+            return View(courses);
+            
         }
         public IActionResult CourseDetail(int? id)
         {

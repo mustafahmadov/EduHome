@@ -59,14 +59,16 @@ namespace EduHomeASPNET.Areas.Administrator.Controllers
         public IActionResult Create()
         {
             ViewBag.Tags = _context.Tags.Where(t => t.HasDeleted == false).ToList();
+            ViewBag.Categories = _context.Categories.Where(c => c.HasDeleted == false).ToList();
             ViewBag.Speakers = _context.Speakers.ToList();
             return View();
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Event eve, List<int> TagId,List<int> SpeakerId)
+        public async Task<IActionResult> Create(Event eve, List<int> TagId, List<int> CategoryId,List<int> SpeakerId)
         {
             ViewBag.Tags = _context.Tags.Where(t => t.HasDeleted == false).ToList();
+            ViewBag.Categories = _context.Categories.Where(c => c.HasDeleted == false).ToList();
             ViewBag.Speakers = _context.Speakers.ToList();
             Event newEvent = new Event();
             EventDetail newEventDetail = new EventDetail();
@@ -107,6 +109,7 @@ namespace EduHomeASPNET.Areas.Administrator.Controllers
             string fileName = await eve.Photo.SaveImgAsync(_env.WebRootPath, folder);
 
             List<EventTag> eventTags = new List<EventTag>();
+            List<CategoryEvent> categoryEvents = new List<CategoryEvent>();
             List<SpeakerEvent> speakerEvents = new List<SpeakerEvent>();
 
             if (TagId.Count == 0)
@@ -125,6 +128,24 @@ namespace EduHomeASPNET.Areas.Administrator.Controllers
                 };
                 eventTags.Add(eventTag);
                 await _context.EventTags.AddAsync(eventTag);
+            }
+            if (CategoryId.Count == 0)
+            {
+                ModelState.AddModelError("", "Kategoriya bosh ola bilmez");
+                return View();
+            }
+
+            foreach (int id in CategoryId)
+            {
+                CategoryEvent categoryEvent = new CategoryEvent()
+                {
+                    EventId = newEvent.Id,
+                    CategoryId = id,
+                    Event = newEvent,
+
+                };
+                categoryEvents.Add(categoryEvent);
+                await _context.CategoryEvents.AddAsync(categoryEvent);
             }
             if (SpeakerId.Count == 0)
             {
@@ -160,7 +181,7 @@ namespace EduHomeASPNET.Areas.Administrator.Controllers
             List<SubscribedEmail> emails = _context.SubscribedEmails.Where(e => e.HasDeleted == false).ToList();
             foreach (SubscribedEmail email in emails)
             {
-                SendEmail(email.Email, "Yeni bir event yaradildi.", "<h1>Yeni bir event yaradildi</h1>");
+                SendEmail(email.Email, "Yeni bir event yaradildi.", "Yeni bir event yaradildi");
             }
 
             newEventDetail.HasDeleted = false;

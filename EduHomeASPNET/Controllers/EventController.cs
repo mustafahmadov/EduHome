@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace EduHomeASPNET.Controllers
-{ 
+{
 
     public class EventController : Controller
     {
@@ -18,24 +18,30 @@ namespace EduHomeASPNET.Controllers
         {
             _context = context;
         }
-        public IActionResult Index()
+        public IActionResult Index(int? page,int? categoryId)
         {
             TempData["controllerName"] = this.ControllerContext.RouteData.Values["controller"].ToString();
-            List<Event> events = _context.Events.Include(e => e.EventDetail)
-                                                   .Where(e => e.HasDeleted == false).ToList();
-            return View(events);
-        }
-        public async Task<IActionResult> EventDetail(int? id)
+            ViewBag.CatId = categoryId;
+            if (categoryId == null)
+            {
+                ViewBag.PageCount = Decimal.Ceiling((decimal)_context.Courses
+                                          .Where(b => b.HasDeleted == false).Count() / 6);
+                ViewBag.Page = page;
+            }
+            List<CategoryEvent> categoryEvents = _context.CategoryEvents.Include(c => c.Event)
+                        .Include(e => e.Category).Where(e => e.CategoryId == categoryId && e.Event.HasDeleted == false).ToList();
+            return View(categoryEvents);
+        } 
+        public IActionResult EventDetail(int? id)
         {
             TempData["controllerName"] = this.ControllerContext.RouteData.Values["controller"].ToString();
             if (id == null) return NotFound();
             EventVM eventVM = new EventVM()
             {
-                Event = await _context.Events.Include(e => e.EventDetail).Where(e => e.HasDeleted == false && e.Id == id).FirstOrDefaultAsync(),
+                Event = _context.Events.Include(e=>e.EventDetail).Include(e => e.SpeakerEvents)
+                                                      .ThenInclude(e => e.Speaker).FirstOrDefault(e=>e.Id==id),
                 Speakers = _context.Speakers.ToList(),
-                SpeakerEvents = _context.SpeakerEvents.Include(se=>se.Speaker).Where(se=>se.EventId==id).ToList()
             };
-           
             return View(eventVM);
         }
 

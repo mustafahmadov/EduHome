@@ -17,6 +17,7 @@ namespace EduHomeASPNET.Areas.Administrator.Controllers
     [Area("Administrator")]
     //[Authorize(Roles ="Admin")]
     [Authorize(Roles = "Admin,CourseModerator")]
+
     public class CourseController : Controller
     {
         private readonly AppDbContext _context;

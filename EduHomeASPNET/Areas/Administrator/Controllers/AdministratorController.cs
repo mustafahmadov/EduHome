@@ -12,9 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace EduHomeASPNET.Areas.Administrator.Controllers
 {
     [Area("Administrator")]
-    //[Authorize(Roles = "Admin")]
-    //[Authorize(Roles = "User")]
-    //[Authorize(Policy = "RequireAdministratorRole")]
+    [Authorize(Roles = "Admin")]
 
     public class AdministratorController : Controller
     {
@@ -32,13 +30,14 @@ namespace EduHomeASPNET.Areas.Administrator.Controllers
         {
             return View();
         }
-        //[Authorize(Policy = "CreateRolePolicy")]
+        #region CreateRole
+        [Authorize(Policy = "CreateRolePolicy")]
         public IActionResult CreateRole()
         {
             return View();
         }
         [HttpPost]
-        //[Authorize(Policy = "CreateRolePolicy")]
+        [Authorize(Policy = "CreateRolePolicy")]
 
         public async Task<IActionResult> CreateRole(CreateRoleVM model)
         {
@@ -58,9 +57,12 @@ namespace EduHomeASPNET.Areas.Administrator.Controllers
                     ModelState.AddModelError("", error.Description);
                 }
             }
-            
+
             return View(model);
         }
+        #endregion
+
+        #region GetListOfRoles
         [HttpGet]
         public IActionResult ListRoles()
         {
@@ -68,23 +70,23 @@ namespace EduHomeASPNET.Areas.Administrator.Controllers
             return View(roles);
         }
 
+        #endregion
+
+        #region GetListOfUsers
         public IActionResult ListUsers()
         {
             var users = _userManager.Users;
             return View(users);
         }
+        #endregion
 
+        #region EditRole
         [HttpGet]
         public async Task<IActionResult> EditRole(string id)
         {
-            // Find the role by Role ID
             IdentityRole role = await _roleManager.FindByIdAsync(id);
 
-            if (role == null)
-            {
-                ViewBag.ErrorMessage = $"Role with Id = {id} cannot be found";
-                return View("NotFound");
-            }
+            if (role == null) return NotFound();
 
             EditRoleVM model = new EditRoleVM
             {
@@ -92,69 +94,54 @@ namespace EduHomeASPNET.Areas.Administrator.Controllers
                 RoleName = role.Name
             };
 
-            // Retrieve all the Users
-            foreach (var user in _userManager.Users)
+            foreach (AppUser user in _userManager.Users)
             {
-                // If the user is in this role, add the username to
-                // Users property of EditRoleVM. This model
-                // object is then passed to the view for display
                 if (await _userManager.IsInRoleAsync(user, role.Name))
-                {
                     model.Users.Add(user.UserName);
-                }
             }
 
             return View(model);
         }
 
-        // This action responds to HttpPost and receives EditRoleVM
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> EditRole(EditRoleVM model)
         {
             var role = await _roleManager.FindByIdAsync(model.Id);
 
-            if (role == null)
-            {
-                ViewBag.ErrorMessage = $"Role with Id = {model.Id} cannot be found";
-                return View("NotFound");
-            }
+            if (role == null) return NotFound();
             else
             {
                 role.Name = model.RoleName;
 
-                // Update the Role using UpdateAsync
-                var result = await _roleManager.UpdateAsync(role);
+                IdentityResult result = await _roleManager.UpdateAsync(role);
 
                 if (result.Succeeded)
                 {
                     return RedirectToAction("ListRoles");
                 }
-
                 foreach (var error in result.Errors)
                 {
                     ModelState.AddModelError("", error.Description);
                 }
-
+ 
                 return View(model);
             }
         }
+        #endregion
+
+        #region EditUsersInRole
         [HttpGet]
         public async Task<IActionResult> EditUsersInRole(string roleId)
         {
             ViewBag.roleId = roleId;
+            IdentityRole role = await _roleManager.FindByIdAsync(roleId);
 
-            var role = await _roleManager.FindByIdAsync(roleId);
+            if (role == null) return NotFound();
 
-            if (role == null)
-            {
-                ViewBag.ErrorMessage = $"Role with Id = {roleId} cannot be found";
-                return View("NotFound");
-            }
+            List<UserRoleVM> model = new List<UserRoleVM>();
 
-            var model = new List<UserRoleVM>();
-
-            foreach (var user in _userManager.Users)
+            foreach (AppUser user in _userManager.Users)
             {
                 UserRoleVM userRoleViewModel = new UserRoleVM()
                 {
@@ -163,13 +150,9 @@ namespace EduHomeASPNET.Areas.Administrator.Controllers
                 };
 
                 if (await _userManager.IsInRoleAsync(user, role.Name))
-                {
                     userRoleViewModel.IsSelected = true;
-                }
                 else
-                {
                     userRoleViewModel.IsSelected = false;
-                }
 
                 model.Add(userRoleViewModel);
             }
@@ -179,13 +162,9 @@ namespace EduHomeASPNET.Areas.Administrator.Controllers
         [HttpPost]
         public async Task<IActionResult> EditUsersInRole(List<UserRoleVM> model, string roleId)
         {
-            var role = await _roleManager.FindByIdAsync(roleId);
+            IdentityRole role = await _roleManager.FindByIdAsync(roleId);
 
-            if (role == null)
-            {
-                ViewBag.ErrorMessage = $"Role with Id = {roleId} cannot be found";
-                return View("NotFound");
-            }
+            if (role == null) return NotFound();
 
             for (int i = 0; i < model.Count; i++)
             {
@@ -217,7 +196,9 @@ namespace EduHomeASPNET.Areas.Administrator.Controllers
 
             return RedirectToAction("EditRole", new { Id = roleId });
         }
+        #endregion
 
+        #region EditUser
         [HttpGet]
         public async Task<IActionResult> EditUser(string id)
         {
@@ -229,9 +210,7 @@ namespace EduHomeASPNET.Areas.Administrator.Controllers
                 return View("NotFound");
             }
 
-            // GetClaimsAsync retunrs the list of user Claims
             var userClaims = await _userManager.GetClaimsAsync(user);
-            // GetRolesAsync returns the list of user Roles
             var userRoles = await _userManager.GetRolesAsync(user);
 
             var model = new EditUserVM
@@ -275,11 +254,13 @@ namespace EduHomeASPNET.Areas.Administrator.Controllers
 
                 return View(model);
             }
-           
-            
-        }
 
-        public async Task <IActionResult> Delete(string id)
+
+        }
+        #endregion
+
+        #region DeleteUser
+        public async Task<IActionResult> Delete(string id)
         {
             var user = await _userManager.FindByIdAsync(id);
 
@@ -294,16 +275,12 @@ namespace EduHomeASPNET.Areas.Administrator.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteUser(string id)
         {
-            var user = await _userManager.FindByIdAsync(id);
+            AppUser user = await _userManager.FindByIdAsync(id);
 
-            if (user == null)
-            {
-                ViewBag.ErrorMessage = $"User with Id = {id} cannot be found";
-                return View("NotFound");
-            }
+            if (user == null) return NotFound();
             else
             {
-                var result = await _userManager.DeleteAsync(user);
+                IdentityResult result = await _userManager.DeleteAsync(user);
 
                 if (result.Succeeded)
                 {
@@ -318,7 +295,9 @@ namespace EduHomeASPNET.Areas.Administrator.Controllers
                 return View("ListUsers");
             }
         }
+        #endregion
 
+        #region ManageUserRoles
         [HttpGet]
         public async Task<IActionResult> ManageUserRoles(string userId)
         {
@@ -326,17 +305,13 @@ namespace EduHomeASPNET.Areas.Administrator.Controllers
 
             var user = await _userManager.FindByIdAsync(userId);
 
-            if (user == null)
-            {
-                ViewBag.ErrorMessage = $"User with Id = {userId} cannot be found";
-                return View("NotFound");
-            }
+            if (user == null) return NotFound();
 
-            var model = new List<UserRolesVM>();
+            List<UserRolesVM> model = new List<UserRolesVM>();
 
-            foreach (var role in _roleManager.Roles)
+            foreach (IdentityRole role in _roleManager.Roles)
             {
-                var userRolesViewModel = new UserRolesVM
+                UserRolesVM userRolesViewModel = new UserRolesVM
                 {
                     RoleId = role.Id,
                     RoleName = role.Name
@@ -359,13 +334,9 @@ namespace EduHomeASPNET.Areas.Administrator.Controllers
         [HttpPost]
         public async Task<IActionResult> ManageUserRoles(List<UserRolesVM> model, string userId)
         {
-            var user = await _userManager.FindByIdAsync(userId);
+            AppUser user = await _userManager.FindByIdAsync(userId);
 
-            if (user == null)
-            {
-                ViewBag.ErrorMessage = $"User with Id = {userId} cannot be found";
-                return View("NotFound");
-            }
+            if (user == null) return NotFound();
 
             var roles = await _userManager.GetRolesAsync(user);
             var result = await _userManager.RemoveFromRolesAsync(user, roles);
@@ -387,18 +358,16 @@ namespace EduHomeASPNET.Areas.Administrator.Controllers
 
             return RedirectToAction("EditUser", new { Id = userId });
         }
+        #endregion
+
+        #region ManageUserClaims
         [HttpGet]
         public async Task<IActionResult> ManageUserClaims(string userId)
         {
-            var user = await _userManager.FindByIdAsync(userId);
+            AppUser user = await _userManager.FindByIdAsync(userId);
 
-            if (user == null)
-            {
-                ViewBag.ErrorMessage = $"User with Id = {userId} cannot be found";
-                return View("NotFound");
-            }
+            if (user == null) return NotFound();
 
-            // UserManager service GetClaimsAsync method gets all the current claims of the user
             var existingUserClaims = await _userManager.GetClaimsAsync(user);
 
             var model = new UserClaimsVM
@@ -406,7 +375,7 @@ namespace EduHomeASPNET.Areas.Administrator.Controllers
                 UserId = userId
             };
 
-            // Loop through each claim we have in our application
+
             foreach (Claim claim in ClaimsStore.AllClaims)
             {
                 UserClaim userClaim = new UserClaim
@@ -414,8 +383,6 @@ namespace EduHomeASPNET.Areas.Administrator.Controllers
                     ClaimType = claim.Type
                 };
 
-                // If the user has the claim, set IsSelected property to true, so the checkbox
-                // next to the claim is checked on the UI
                 if (existingUserClaims.Any(c => c.Type == claim.Type))
                 {
                     userClaim.IsSelected = true;
@@ -432,11 +399,7 @@ namespace EduHomeASPNET.Areas.Administrator.Controllers
         {
             var user = await _userManager.FindByIdAsync(model.UserId);
 
-            if (user == null)
-            {
-                ViewBag.ErrorMessage = $"User with Id = {model.UserId} cannot be found";
-                return View("NotFound");
-            }
+            if (user == null) return NotFound();
 
             // Get all the user existing claims and delete them
             var claims = await _userManager.GetClaimsAsync(user);
@@ -448,7 +411,6 @@ namespace EduHomeASPNET.Areas.Administrator.Controllers
                 return View(model);
             }
 
-            // Add all the claims that are selected on the UI
             result = await _userManager.AddClaimsAsync(user,
                 model.Cliams.Where(c => c.IsSelected).Select(c => new Claim(c.ClaimType, c.ClaimType)));
 
@@ -461,5 +423,8 @@ namespace EduHomeASPNET.Areas.Administrator.Controllers
             return RedirectToAction("EditUser", new { Id = model.UserId });
 
         }
+        #endregion
+
+
     }
 }

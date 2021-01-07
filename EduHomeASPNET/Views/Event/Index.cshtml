@@ -1,40 +1,78 @@
-﻿@model List<Event>
+﻿@model List<CategoryEvent>
 @{
     ViewData["Title"] = "Events";
 }
 
 <div class="event-area three text-center pt-150 pb-150">
     <div class="container">
-        <div class="row">
-            @foreach (Event eve in Model)
-            {
-                <div class="col-md-4 col-sm-6 col-xs-12">
-                    <div class="single-event mb-60">
-                        <div class="event-img">
-                            <a asp-controller="Event" asp-action="EventDetail" asp-route-id="@eve.Id">
-                                <img src="~/assets/img/event/@eve.Image" alt="event" style="height:300px">
-                                <div class="course-hover">
-                                    <i class="fa fa-link"></i>
+        @if (Model.Count == 0 && ViewBag.CatId == null)
+        {
+            <div class="row">
+                @await Component.InvokeAsync("Event", new { page = ViewBag.Page, take = 6 })
+            </div>
+
+
+            <div class="row">
+                <div class="col-xs-12 text-center">
+                    <div class="pagination d-flex justify-content-center align-item-center text-center">
+                        <ul>
+                            @for (int i = 1; i <= ViewBag.PageCount; i++)
+                            {
+                                if (i == ViewBag.Page)
+                                {
+                                    <li class="disabled page-item">
+                                        <a class="page-link" href="#">@i</a>
+                                    </li>
+                                }
+                                else
+                                {
+                                    <li class="page-item">
+                                        <a class="page-link" asp-controller="Event" asp-action="Index" asp-route-page="@i">@i</a>
+                                    </li>
+                                }
+                            }
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="row">
+                @foreach (CategoryEvent eve in Model)
+                {
+                    <div class="col-md-4 col-sm-6 col-xs-12">
+                        <div class="single-event mb-60">
+                            <div class="event-img">
+                                <a asp-controller="Event" asp-action="EventDetail" asp-route-id="@eve.Event.Id">
+                                    <img src="~/assets/img/event/@eve.Event.Image" alt="event" style="height:300px">
+                                    <div class="course-hover">
+                                        <i class="fa fa-link"></i>
+                                    </div>
+                                </a>
+                                <div class="event-date">
+                                    <h3>@eve.Event.OrganizedDay.ToString("MMM dd")</h3>
                                 </div>
-                            </a>
-                            <div class="event-date">
-                                <h3>@eve.OrganizedDay.ToString("MMM dd")</h3>
                             </div>
-                        </div>
-                        <div class="event-content text-left">
-                            <h4><a asp-controller="Event" asp-action="EventDetail" asp-route-id="@eve.Id">@eve.Name</a></h4>
-                            <ul>
-                                <li><span>time:</span> @eve.StartTime.ToString("HH:mm") - @eve.EndTime.ToString("HH:mm")</li>
-                                <li><span>venue</span> @eve.PlacedArea</li>
-                            </ul>
-                            <div class="event-content-right">
-                                <a class="default-btn" asp-controller="Event" asp-action="EventDetail" asp-route-id="@eve.Id">join now</a>
+                            <div class="event-content text-left">
+                                <h4><a asp-controller="Event" asp-action="EventDetail" asp-route-id="@eve.Event.Id">@eve.Event.Name</a></h4>
+                                <ul>
+                                    <li><span>time:</span> @eve.Event.StartTime.ToString("HH:mm") - @eve.Event.EndTime.ToString("HH:mm")</li>
+                                    <li><span>venue</span> @eve.Event.PlacedArea</li>
+                                </ul>
+                                <div class="event-content-right">
+                                    <a class="default-btn" asp-controller="Event" asp-action="EventDetail" asp-route-id="@eve.Event.Id">join now</a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            }
-        </div>
+                }
+
+            </div>
+        }
+
+
     </div>
 </div>
 

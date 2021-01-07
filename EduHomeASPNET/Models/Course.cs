@@ -23,5 +23,6 @@ namespace EduHomeASPNET.Models
         public DateTime? DeletedTime { get; set; }
         public CourseDetail CourseDetail { get; set; }
         public int CourseDetailId { get; set; }
+        public virtual ICollection<CategoryCourse> CategoryCourses { get; set; }
     }
 }

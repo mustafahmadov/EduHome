@@ -29,6 +29,10 @@ namespace EduHomeASPNET.Models
         public int EventDetailId { get; set; }
         public EventDetail EventDetail { get; set; }
 
+        public virtual ICollection<SpeakerEvent> SpeakerEvents { get; set; }
+
+        public virtual ICollection<CategoryEvent> CategoryEvents { get; set; }
+
 
 
     }

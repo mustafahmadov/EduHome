@@ -1,4 +1,4 @@
-﻿@model List<Course>
+﻿@model List<CategoryCourse>
 @{
     ViewData["Title"] = "Courses";
 }
@@ -7,32 +7,60 @@
 <div class="course-area pt-150 pb-150">
     <div class="container">
         <div class="row" id="courseArea">
-            @await Component.InvokeAsync("Course",new { page=ViewBag.Page,take=6})
-        </div>
-        <div class="row">
-            <div class="col-xs-12 text-center">
-                <div class="pagination d-flex justify-content-center align-item-center text-center">
-                    <ul>
-                        @for (int i = 1; i <= ViewBag.PageCount; i++)
-                        {
-                            if (i == ViewBag.Page)
-                            {
-                                <li class="disabled page-item">
-                                    <a class="page-link" href="#">@i</a>
-                                </li>
-                            }
-                            else
-                            {
-                                <li class="page-item">
-                                    <a class="page-link" asp-controller="Course" asp-action="Index" asp-route-page="@i">@i</a>
-                                </li>
-                            }
-                        }
+            @if (Model.Count() == 0 && ViewBag.CatId == null)
+            {
+                @await Component.InvokeAsync("Course", new { page = ViewBag.Page, take = 6 })
+                <div class="row">
+                    <div class="col-xs-12 text-center">
+                        <div class="pagination d-flex justify-content-center align-item-center text-center">
+                            <ul>
+                                @for (int i = 1; i <= ViewBag.PageCount; i++)
+                                {
+                                    if (i == ViewBag.Page)
+                                    {
+                                        <li class="disabled page-item">
+                                            <a class="page-link" href="#">@i</a>
+                                        </li>
+                                    }
+                                    else
+                                    {
+                                        <li class="page-item">
+                                            <a class="page-link" asp-controller="Course" asp-action="Index" asp-route-page="@i">@i</a>
+                                        </li>
+                                    }
+                                }
 
-                    </ul>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
-            </div>
+            }
+            else
+            {
+                @foreach (CategoryCourse course in Model)
+                {
+                    <div class="col-md-4 col-sm-6 col-xs-12">
+                        <div class="single-course mb-70">
+                            <div class="course-img">
+                                <a asp-controller="Course" asp-action="CourseDetail" asp-route-id="@course.Course.Id">
+                                    <img src="~/assets/img/course/@course.Course.Image" alt="course" style="height:300px">
+                                    <div class="course-hover">
+                                        <i class="fa fa-link"></i>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="course-content">
+                                <h3><a asp-controller="Course" asp-action="CourseDetail" asp-route-id="@course.Course.Id">@course.Course.Name</a></h3>
+                                <p>@course.Course.Description</p>
+                                <a class="default-btn" asp-controller="Course" asp-action="CourseDetail" asp-route-id="@course.Course.Id">read more</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+
         </div>
+        
     </div>
 </div>
 <!-- Course End -->

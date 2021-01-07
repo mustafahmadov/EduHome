@@ -34,5 +34,11 @@
 </div>
 @section Scripts{
     <partial name="_ValidationScriptsPartial"/>
+     <script>
+         $("#mc-embedded-subscribe").click(function () {
+             $(this).prop("disabled", true)
+             $(this).css("cursor", "not-allowed")
+         });
+     </script>
 }
 

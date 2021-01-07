@@ -16,20 +16,21 @@ namespace EduHomeASPNET.Controllers
         {
             _context = context;
         }
-        public async Task<IActionResult> Index(int? page)
+        public IActionResult Index(int? page,int? categoryId)
         {
             TempData["controllerName"] = this.ControllerContext.RouteData.Values["controller"].ToString();
-            ViewBag.PageCount = Decimal.Ceiling((decimal)_context.Blogs
-                                           .Where(b => b.HasDeleted == false).Count() / 6);
-            ViewBag.Page = page;
-            if (page == null)
+            ViewBag.CatBlogId = categoryId;
+            if (categoryId == null)
             {
-                return View(await _context.Blogs.Include(blogs => blogs.Author).Where(b => b.HasDeleted == false)
-                                                .OrderByDescending(b => b.Id).Take(6).ToListAsync());
+                ViewBag.PageCount = Decimal.Ceiling((decimal)_context.Blogs
+                                           .Where(b => b.HasDeleted == false).Count() / 6);
+                ViewBag.Page = page;
+                return View();
             }
-
-            return View(await _context.Blogs.Include(blogs => blogs.Author).Where(b => b.HasDeleted == false)
-                                          .OrderByDescending(b => b.Id).Skip(((int)page - 1) * 6).Take(6).ToListAsync());
+            List<CategoryBlog> categoryBlogs = _context.CategoryBlogs.Include(c => c.Blog).ThenInclude(b => b.Author)
+                          .Include(c => c.Category).Where(cb => cb.CategoryId == categoryId && cb.Blog.HasDeleted == false).ToList();
+            return View(categoryBlogs);
+          
         }
         public IActionResult BlogDetail(int? id)
         {
@@ -37,7 +38,8 @@ namespace EduHomeASPNET.Controllers
             if (id == null) return NotFound();
             Blog blog = _context.Blogs.Include(b => b.BlogDetail).Include(b => b.Author)
                      .Where(t => t.HasDeleted == false && t.Id == id).FirstOrDefault();
-            //List<Event> events = _context.Events.Include(e=>e.)
+            List<Event> events = _context.Events.Include(e => e.SpeakerEvents)
+                                                    .ThenInclude(e => e.Speaker).ToList();
             return View(blog);
 
         }

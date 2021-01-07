@@ -13,5 +13,8 @@ namespace EduHomeASPNET.Models
         public string Description { get; set; }
         public bool HasDeleted { get; set; }
         public DateTime DeletedTime { get; set; }
+        public virtual ICollection<CategoryCourse> CategoryCourses { get; set; }
+        public virtual ICollection<CategoryBlog> CategoryBlogs { get; set; }
+        public virtual ICollection<CategoryEvent> CategoryEvents { get; set; }
     }
 }

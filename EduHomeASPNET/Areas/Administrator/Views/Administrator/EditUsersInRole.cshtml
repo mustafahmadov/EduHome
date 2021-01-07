@@ -10,7 +10,18 @@
             <h2>Add or remove users from this role</h2>
         </div>
         <div class="card-body">
-            @for (int i = 0; i < Model.Count; i++)
+            @foreach (var user in Model)
+            {
+                <div class="form-check m-1">
+                    <input type="hidden" asp-for="@user.UserId" />
+                    <input type="hidden" asp-for="@user.UserName" />
+                    <input asp-for="@user.IsSelected" class="form-check-input" />
+                    <label class="form-check-label" asp-for="@user.IsSelected">
+                        @user.UserName
+                    </label>
+                </div>
+            }
+            @*@for (int i = 0; i < Model.Count; i++)
             {
                 <div class="form-check m-1">
                     <input type="hidden" asp-for="@Model[i].UserId" />
@@ -20,7 +31,7 @@
                         @Model[i].UserName
                     </label>
                 </div>
-            }
+            }*@
         </div>
         <div class="card-footer">
             <input type="submit" value="Update" class="btn btn-primary"
